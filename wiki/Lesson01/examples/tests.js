@@ -7,20 +7,6 @@ console.log("1:", x, y, z, a);
 console.log("2:", typeof(x), typeof(y), typeof(z), typeof(a));
 console.log("3:", x == y, x == z, x === y, x === z);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
 // Object
 let obj = {x: 3, y: 2};
 console.log("4:", typeof obj);
@@ -68,7 +54,6 @@ const counter = setCounter();
 console.log(counter());
 console.log(counter());
 console.log(counter());
-*/
 
 /*
 // Stack call:

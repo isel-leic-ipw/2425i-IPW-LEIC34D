@@ -372,6 +372,27 @@
 
 ## Destructuring
 
+- Unpack values from an array or object.
+- Example with array:
+    ```js 
+    let a, b, rest;
+    [a, b] = [10, 20];
+
+    console.log(a);
+    // → 10
+    console.log(b);
+    // → 20
+    [a, b, ...rest] = [10, 20, 30, 40, 50];
+    console.log(rest);
+    // → [ 30, 40, 50 ]
+    ```
+- Example with object:
+    ```js
+    const obj = { x: 3.8, y: 7.2 };
+    const { x, y } = obj;
+    console.log(x, y);
+    // → 3.8 7.2
+    ```
 
 ## Json
 - JSON: JavaScript object notation.
@@ -382,8 +403,8 @@
         surnames: ["Silva", "Nunes"]
     }
     ```
-- In the example, surnames may not be in the same memory address space of person.
-    - They are distinct objects probably allocated in not serial memory space.
+- In the example, `surnames` may not be in the same memory address space of person.
+    - They are distinct objects probably **not** allocated in serial memory space.
 - Methods for serialize and *unserialize*:
     ```js
     const person = {
@@ -397,3 +418,4 @@
     console.log(JSON.parse(personSerialized).surnames);
     // → [ 'Silva', 'Nunes' ]
     ```
+---

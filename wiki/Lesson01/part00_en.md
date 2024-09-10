@@ -43,7 +43,7 @@
 
 - The final grade will be the best grade obtained through the following formula:
 
-    - $40\% [T] + 60\% [E+P]$
+    - $40\\% [T] + 60\\% [E+P]$
 
 - Details for each assessment component:
 
@@ -66,3 +66,5 @@
 - The theoretical component $[T]$ consists of a written test carried out on the date of the special examination period.
 
 - The practical component $[P]$ is carried out individually. It has an autonomous statement and must be delivered before doing the written test, on the deadline date defined in the corresponding statement.
+
+---

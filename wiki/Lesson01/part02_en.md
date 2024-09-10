@@ -100,8 +100,8 @@ console.log(x);  // Expression statement
 
     ```js
     let theNumber = 7;
-    console.log("The number is the square root of " +
-                theNumber * theNumber);
+    let squareRoot = theNumber * theNumber;
+    console.log("The number is the square root of " + squareRoot);
     ```
 
 ### Blocks
@@ -153,7 +153,7 @@ console.log(x);  // Expression statement
 
     ```javascript
     while (condition)
-        // Statements or block
+        // Statement or block
     ```
 
 - Example:
