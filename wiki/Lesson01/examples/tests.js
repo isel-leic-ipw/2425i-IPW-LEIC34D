@@ -7,6 +7,20 @@ console.log("1:", x, y, z, a);
 console.log("2:", typeof(x), typeof(y), typeof(z), typeof(a));
 console.log("3:", x == y, x == z, x === y, x === z);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 // Object
 let obj = {x: 3, y: 2};
 console.log("4:", typeof obj);
@@ -24,11 +38,11 @@ console.log("6:", h);
 // Function and scope
 console.log("7:", test());
 console.log("8:", typeof test);
-console.log("9:", k);
+//console.log("8.1:", k);
 
 function test(){
     var k = 4;
-    console.log("test with k =", k);
+    console.log("9: test with k =", k);
 }
 
 // Arrow function
@@ -36,7 +50,11 @@ sum = (x, y) => x + y;
 console.log("10:", sum(2, 4));
 
 // Array
-console.log(typeof [1, 2])
+const arr = [1, 2]
+console.log("11:", typeof arr);
+
+// Json
+console.log("12:", JSON.stringify({a: 2, b: [1, 2]}));
 
 // Closure
 function setCounter() {
@@ -50,6 +68,7 @@ const counter = setCounter();
 console.log(counter());
 console.log(counter());
 console.log(counter());
+*/
 
 /*
 // Stack call:

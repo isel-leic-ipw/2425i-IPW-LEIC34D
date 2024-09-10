@@ -279,12 +279,12 @@
 ## Strings and their properties
 - Strings have properties as `length` and `toUpperCase`.
     - But they are **immutable**, so we can't add properties:
-        ```js
-        let maria = "Maria";
-        maria.age = 30;
-        console.log(maria.age);
-        // → undefined
-        ```
+    ```js
+    let maria = "Maria";
+    maria.age = 30;
+    console.log(maria.age);
+    // → undefined
+    ```
 - Accessing string character (as array):
     ```js
     console.log("coconuts"[4]);
@@ -329,7 +329,7 @@
 ## Rest Parameters
 - Allow a function to accept an indefinite number of arguments as an array.
 
-```js
+    ```js
     function sum(...theArgs) {
     let total = 0;
     for (const arg of theArgs) {
@@ -342,7 +342,7 @@
     // → 6
     console.log(sum(1, 2, 3, 4));
     // → 10
-```
+    ```
 
 ## Optional property access
 - Variant of dot notation: `object?.property`.
@@ -381,8 +381,19 @@
         name: "Ana",
         surnames: ["Silva", "Nunes"]
     }
-    
     ```
 - In the example, surnames may not be in the same memory address space of person.
     - They are distinct objects probably allocated in not serial memory space.
 - Methods for serialize and *unserialize*:
+    ```js
+    const person = {
+        name: "Ana",
+        surnames: ["Silva", "Nunes"]
+    }
+    personSerialized = JSON.stringify(person);
+    console.log(personSerialized);
+    // → {"name":"Ana","surnames":["Silva","Nunes"]}
+
+    console.log(JSON.parse(personSerialized).surnames);
+    // → [ 'Silva', 'Nunes' ]
+    ```
