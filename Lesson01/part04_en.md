@@ -404,7 +404,7 @@
     }
     ```
 - In the example, `surnames` may not be in the same memory address space of person.
-    - They are distinct objects probably **not** allocated in serial memory space.
+    - They are distinct objects probably **not** allocated in serial space of memory.
 - Methods for serialize and *unserialize*:
     ```js
     const person = {
@@ -418,4 +418,11 @@
     console.log(JSON.parse(personSerialized).surnames);
     // → [ 'Silva', 'Nunes' ]
     ```
+---
+
+## Exercises
+
+- From the book Eloquent JavaScript: 
+    - https://eloquentjavascript.net/04_data.html#h-TcUD2vzyMe
+
 ---
