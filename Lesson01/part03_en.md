@@ -246,3 +246,9 @@
 
 ---
 
+## Exercises
+
+- From the book Eloquent JavaScript: 
+    - https://eloquentjavascript.net/03_functions.html#h-TcUD2vzyMe
+
+---
