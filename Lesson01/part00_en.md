@@ -12,7 +12,7 @@
 - Book: [Secrets of the javascript Ninja](https://www.manning.com/books/secrets-of-the-javascript-ninja-second-edition) (by John Resig) - 2nd Edition
 - [Exploring ES6](http://exploringjs.com/es6/)
 - [Exploring ES2016 and ES2017](https://exploringjs.com/es2016-es2017.html)
-- These class notes.
+- These lecture notes.
 
 
 ### Node.JS
