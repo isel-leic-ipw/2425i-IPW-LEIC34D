@@ -33,17 +33,31 @@ console.log("9:", sum(2, 4));
 
 // Closure
 function setCounter() {
-    let counter = 0;
+    let c = 0;
     return function () {
-        counter += 1; return counter;
+        c += 1; return c;
     }
 }
 
 const counter = setCounter();
 console.log(typeof counter);
-console.log(counter());
-console.log(counter());
-console.log(counter());
+console.log("Ex. closure:", counter());
+console.log("Ex. closure:", counter());
+console.log("Ex. closure:", counter());
+
+// Closure: another example
+let counter2;
+{
+    let c = 0; // closure
+    counter2 = function (){
+        c++;
+        return(c);
+    }
+}
+
+console.log("Ex. closure:", counter2());
+console.log("Ex. closure:", counter2());
+console.log("Ex. closure:", counter2());
 
 /*
 // Stack call:
