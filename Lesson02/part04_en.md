@@ -350,7 +350,7 @@ console.log(point5);
     console.log(sequence);
     // → [1, 2, 3, 4]
    ```
-- `shift` and `unshift`: add and remove values to/from the start of the array.
+- `unshift` and `shift`: add and remove values to/from the start of the array.
     ```js
     let todoList = [];
     function remember(task) {
@@ -409,7 +409,7 @@ console.log(point5);
     - `Object.values(object)`: Returns an array of the property values of an object.
         ```js
         console.log(Object.values({x: 0, y: 0, z: 2}));
-        // → [ 'x', 'y', 'z' ]
+        // → [ 0, 0, 2 ]
         ```
 
 ### Methods Call and Apply
