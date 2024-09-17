@@ -106,7 +106,7 @@ String.prototype.enclose = function () {
 
 let s2 = "LEIC";
 
-console.log("15." + s1.enclose);
+console.log("15.", s1.enclose);
 
 console.log("16.", s2.enclose());
 console.log("17.", s1.enclose());
@@ -116,14 +116,14 @@ console.log("17.", s1.enclose());
 
 console.log("18.", s1.substring(2, 4));
 
-// Modifing an existing method for bad:
+// Modifying an existing method for bad:
 String.prototype.substring = function (b, e) {
     return "Busted!!!!";
 };
 
 console.log("19.", s1.substring(2, 4));
 
-// Modifing an existing method for good:
+// Modifying an existing method for good:
 console.log("20.", "Hello,".concat("LEIC ", "and ", "ISEL"));
 
 //Using a global variable to store the old implementation
@@ -131,32 +131,37 @@ const oldConcat = String.prototype.concat; // Not recommended
 String.prototype.concat = function (...args) {
     const PREFIX = " #1# ";
     let newArgs = [];
+    console.log("--->", args);
     for (let arg of args) newArgs.push(PREFIX + arg);
     //let newArgs = args.map(s => PREFIX + s);
     return oldConcat.apply(PREFIX + this, newArgs);
 }
 
-// Storing the old implementation in String prototype instead of in a global variable
-// String.prototype.oldConcat = String.prototype.concat; // Not recommended
-// String.prototype.concat = function (...args) {
-//     const PREFIX = " #2# ";
-//     let newArgs = [];
-//     for (let arg of args) newArgs.push(PREFIX + arg);
-//     //let newArgs = args.map(s => PREFIX + s);
-//     return (PREFIX + this).oldConcat(newArgs);
-// }
+/*
+//Storing the old implementation in String prototype instead of in a global variable
+String.prototype.oldConcat = String.prototype.concat; // Not recommended
+String.prototype.concat = function (...args) {
+    const PREFIX = " #2# ";
+    let newArgs = [];
+    for (let arg of args) newArgs.push(PREFIX + arg);
+    //let newArgs = args.map(s => PREFIX + s);
+    return (PREFIX + this).oldConcat(newArgs);
+}
+*/
 
+/*
 // Creating a new scope (block) to create a new closure
-// {
-//     // Using a local variable to store the old implementation
-//     let oldConcat = String.prototype.concat;
-//     String.prototype.concat = function (...args) {
-//         const PREFIX = " #3# ";
-//         let newArgs = [];
-//         for (let arg of args) newArgs.push(PREFIX + arg);
-//         //let newArgs = args.map(s => PREFIX + s);
-//         return oldConcat.apply(PREFIX + this, newArgs);
-//     };
-// }
+{
+    // Using a local variable to store the old implementation
+    let oldConcat = String.prototype.concat;
+    String.prototype.concat = function (...args) {
+        const PREFIX = " #3# ";
+        let newArgs = [];
+        for (let arg of args) newArgs.push(PREFIX + arg);
+        //let newArgs = args.map(s => PREFIX + s);
+        return oldConcat.apply(PREFIX + this, newArgs);
+    };
+}
+*/
 
 console.log("21.", "Hello,".concat("LEIC ", "and ", "ISEL"));
