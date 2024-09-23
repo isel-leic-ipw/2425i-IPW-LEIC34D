@@ -1,0 +1,14 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "description": "Test examples",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Professor",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.7.3"
+  }
+}
