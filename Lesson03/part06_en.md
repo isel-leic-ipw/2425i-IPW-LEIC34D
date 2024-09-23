@@ -20,4 +20,4 @@
     console.log(arr1.sumArray(arr2));
     // → [ 6, 4, 5, 8 ]
     ```
-4. Override the function `console.info` to add a number at the beginning of each string to enumerate the prints. Note that this is a function
+4. Override the function `console.info` to add a number at the beginning of each string to enumerate the prints. Note that this is a function, not an Object.
