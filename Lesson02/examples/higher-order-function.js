@@ -17,10 +17,11 @@ names.forEach((elem) => console.log(elem));
 
 // Modify all elements of an array to upper case (not possible with forEach!):
 names.forEach(elem => elem.toUpperCase()); // elem is a variable assigned to the elements of the array in the scope of the arrow function.
-console.log(names); // Not modify the elements!
+console.log("-->", names); // Not modify the elements!
 names.forEach((elem, index, theArray) => theArray[index] = elem.toUpperCase());
 console.log(names);
 
+/*
 // --------------------------------
 // Filtering:
 // Objective: filter elements of an array according to a predicated function and return an new array of these elements.
@@ -91,3 +92,5 @@ function mySome(arr, predicate){
 
 console.log([1, 20, 2].some((elem) => elem > 20));
 console.log(mySome([1, 20, 2], (elem) => elem > 20));
+
+*/
