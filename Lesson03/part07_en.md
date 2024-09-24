@@ -157,5 +157,8 @@
 
 ## Exercises
 
-1. Implement a test for a past exercise.
-
+1. Implement a test with Mocha for the item 1 (histogram) from the proposed exercise in part06.
+    - Examples of inputs and expected outputs:
+        - `"aaaa"` -> `{ a : 4 }`
+        - `"bbbb"` -> `{ a : 4, b : 4 }`
+        - `"BBb"` -> `{ a : 4, b : 7 }`
