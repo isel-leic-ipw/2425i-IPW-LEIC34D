@@ -155,10 +155,22 @@
     npm test
     ```
 
+## Summary for Create a Project and Test
+
+- Follow this steps in terminal to create a project and test with Mocha:
+    ```bash
+    cd <workspace directory>
+    npm init
+    npm install mocha --save-dev
+    npm test
+    ```
+- Before testing, write the tests in the `test` directory.
+- Before testing, include the mocha as the test script in the `package.json`.
+
 ## Exercises
 
 1. Implement a test with Mocha for the item 1 (histogram) from the proposed exercise in part06.
     - Examples of inputs and expected outputs:
-        - `"aaaa"` -> `{ a : 4 }`
-        - `"bbbb"` -> `{ a : 4, b : 4 }`
-        - `"BBb"` -> `{ a : 4, b : 7 }`
+        - `"aaaa"` → `{ A : 4 }`
+        - `"bbbb"` → `{ A : 4, B : 4 }`
+        - `"BBb"`  → `{ A : 4, B : 7 }`
