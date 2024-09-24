@@ -29,6 +29,6 @@ describe('Test Suite for dayname module', function () {
     const ret = dayNumber("Sunday");
 
     // Assert
-    assert.equal(ret, 0, "Should return 1");
+    assert.equal(ret, 0, "Should return 0");
   });
 });
