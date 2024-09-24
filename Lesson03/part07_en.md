@@ -155,7 +155,7 @@
     npm test
     ```
 
-## Summary for Create a Project and Test
+## Summary for Creating a Project and Test
 
 - Follow this steps in terminal to create a project and test with Mocha:
     ```bash
