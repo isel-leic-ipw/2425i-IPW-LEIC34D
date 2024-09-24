@@ -28,7 +28,7 @@
 
 ### Modules
 - Two ways:
-    - Javascrit/ECMAScript Module - ESM
+    - Javascript/ECMAScript Module - ESM
         - Uses `export`, `import`, as we see before.
         - Exported files has extension `.mjs`
     - CommonJS Module - CJS
