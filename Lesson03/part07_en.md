@@ -29,7 +29,7 @@
 ### Modules
 - Two ways:
     - Javascript/ECMAScript Module - ESM
-        - Uses `export`, `import`, as we see before.
+        - Uses `export` and `import` keywords.
         - Exported files has extension `.mjs`
     - CommonJS Module - CJS
         - To import: use of keyword `require`
