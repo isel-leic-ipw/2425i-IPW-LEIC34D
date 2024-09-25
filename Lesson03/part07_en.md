@@ -124,12 +124,13 @@
 ### Basic Test Description
 - One or more files in JavaScript Language.
     - Files must be in `test` directory, by default.
+    - Test files must have the extension `.mjs`
 - Function `describe`: groups tests with a description string.
 - Function `it`: individual test.
     - Has an *arrange* step to define values to test;
     - has an *act* step to call the function to test;
     - has an *assert* step to verify the output.
-- Example:
+- Example (file test-example.mjs):
     ```javascript
     describe("Simple test suite", () => {
         // Arrange
@@ -155,7 +156,14 @@
     npm test
     ```
 
-## Summary for Creating a Project and Test
+### Downloading Dependency Packages from package.json
+- If you have already a package.json but not install yet the dependencies.
+    ```bash
+    npm install
+    ```
+- This command install the dependency packages listed in `package.json` file.
+
+## Summary: Creating a Project and Test
 
 - Follow this steps in terminal to create a project and test with Mocha:
     ```bash
