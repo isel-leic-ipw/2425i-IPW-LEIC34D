@@ -63,6 +63,7 @@
     longOperationAsyncWithCallback(10, processResult);
     console.log("END");
     ```
+    - This example is available at: [examples/sync-async.js](examples/sync-async.js).
 
 ## Promise
 - **[Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)**: "The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value."
@@ -147,7 +148,7 @@
     ```
 
 ### Example with setTimeout
-- `setTimeout` is used to simulate a common .
+- `setTimeout` is used to simulate an async long operation.
     ```js
     function longOperationAsyncWithPromise(a) {
         return new Promise(function(resolve, reject) {
