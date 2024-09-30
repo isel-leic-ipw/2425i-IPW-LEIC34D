@@ -133,7 +133,7 @@
     ```
 - `onRejected`: a function to asynchronously execute when this promise becomes rejected.
 - **Return**:
-    - A new Promise immediately, in the pending state.
+    - A new Promise, immediately, in the pending state.
 - Example:
     ```javascript
     function processResult(v){
@@ -147,16 +147,16 @@
             .catch(processError);
     ```
 
-### Example with setTimeout
+### Promise Example with setTimeout
 - `setTimeout` is used to simulate an async long operation.
     ```js
     function longOperationAsyncWithPromise(a) {
         return new Promise(function(resolve, reject) {
             if(!Number(a)) {
-                reject("A must be a number")
+                reject("A must be a number");
             }
             // Simulating a long operation with setTimeout
-            setTimeout(() => resolve(a.toString()), 3000)    
+            setTimeout(() => resolve(a.toString()), 3000); 
         })
     }
 
@@ -165,9 +165,9 @@
         console.log(result, "is a number"); // Do something with the result
     }
 
-    function processError(result) {
+    function processError(error) {
         console.log("processError");
-        console.log(result); // Do something with the result
+        console.log(error);
     }
 
     // Async model with Promise
