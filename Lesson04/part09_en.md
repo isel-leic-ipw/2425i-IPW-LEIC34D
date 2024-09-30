@@ -24,15 +24,15 @@
     - writeFile returns a promise with no arguments.
         - `Promise<undefined>`
 
-### Chaining Promises: Example 1
-- Objective of this example:
-    - Read the first line of a local file and write this line in a new file.
-- Available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs)
+### Chaining Promises
+- Promises can be chained since the methods then/catch return a Promise.
+- **Example 1**:
+    - Objective: read the first line of a local file and write this line in a new file.
+    - Available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs)
 
-### Chaining Promises: Example 2
-- Objective of this example:
-    - Read a JSON file and extract the object.
-- Available at: [examples/fs-promise/fs-read-json.mjs](examples/fs-promise/fs-read-json.mjs)
+- **Example 2**:
+    - Objective: read a JSON file and extract the object.
+    - Available at: [examples/fs-promise/fs-read-json.mjs](examples/fs-promise/fs-read-json.mjs)
 
 
 
