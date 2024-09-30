@@ -14,7 +14,7 @@
     - `writeFile`: asynchronously writes data to a file, replacing the file if it already exists.
         - https://nodejs.org/api/fs.html#filehandlewritefiledata-options
 
-### Simple Usage
+### Simple Usage: Example
 - Objective of the example:
     - Read the content of a local file and print it.
 - Available at: [examples/fs-promise/fs-sample.mjs](examples/fs-promise/fs-sample.mjs)
@@ -24,10 +24,17 @@
     - writeFile returns a promise with no arguments.
         - `Promise<undefined>`
 
-### Chaining Promises
-- Objective of the example:
+### Chaining Promises: Example 1
+- Objective of this example:
     - Read the first line of a local file and write this line in a new file.
 - Available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs)
+
+### Chaining Promises: Example 2
+- Objective of this example:
+    - Read a JSON file and extract the object.
+- Available at: [examples/fs-promise/fs-read-json.mjs](examples/fs-promise/fs-read-json.mjs)
+
+
 
 ## 2. Fetch
 - The **Fetch standard** defines requests, responses, and the process that binds them: fetching.
@@ -66,6 +73,7 @@
 ### Example 1: An HTTP Request
 
 - Objective: get the length of a response from an HTTP request.
+    - From a free API.
 - Available at: [examples/fetch-examples/fetch-sample.mjs](examples/fetch-examples/fetch-sample.mjs)
 - Both following codes are equivalent:
     1. Each then() return, *i.e*., a promise, is assigned to a constant individually.
@@ -88,7 +96,13 @@
             .catch((err) => console.log("Error"));
         ```
 
-### Example 2: Multiple HTTP Requests
+### Example 2: Another HTTP Request
+
+- Objective: get the joke question and present the answer after ~3s.
+    - From the free API: https://official-joke-api.appspot.com/random_joke
+- Available at: [examples/fetch-examples/fetch-sample2.mjs](examples/fetch-examples/fetch-sample2.mjs)
+
+### Example 3: Multiple HTTP Requests
 - Objective: make two HTTP requests and get sum of the length of each response.
 - Available at: [examples/fetch-examples/http-requests.mjs](examples/fetch-examples/http-requests.mjs)
 
