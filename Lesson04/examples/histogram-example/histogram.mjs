@@ -1,5 +1,5 @@
 export function defHistogram(){
-    let hist = {};
+    const hist = {};
     return function (str){
         for (let l of str){
             let lL = l.toLowerCase();

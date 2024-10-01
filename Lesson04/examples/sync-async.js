@@ -63,10 +63,10 @@ longOperationAsyncWithPromise(VAL+20)   // Promise<Number>
 // let p = longOperationAsyncWithPromise("abc");
 // p.then(processResult1);
 // p.catch(processResult0);
-
+*/
 // Sync model
-console.log("Synchronous function");
-let res = longOperation(VAL);
-processResult1(res); */
+//console.log("Synchronous function");
+//let res = longOperation(VAL);
+//processResult1(res);
 
 console.log("END");

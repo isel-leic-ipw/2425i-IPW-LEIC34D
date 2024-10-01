@@ -25,7 +25,7 @@
         - `Promise<undefined>`
 
 ### Chaining Promises
-- Promises can be chained since the methods then/catch return a Promise.
+- Promises can be chained as the methods then/catch return a Promise.
 - **Example 1**:
     - Objective: read the first line of a local file and write this line in a new file.
     - Available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs)
