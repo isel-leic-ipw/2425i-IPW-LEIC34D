@@ -31,8 +31,8 @@ function longOperationAsyncWithPromise(a) {
 }
 
 // (Number) -> undefined
-function processResult0(result) {
-    console.log("processResult0");
+function processResult0(err) {
+    console.log("processResult0", err);
 }
 
 // (Number) -> undefined
@@ -44,26 +44,26 @@ function processResult1(result) {
 // Main code
 const VAL = 2000000000;
 
-console.log("Asynchronous function with callback");
+//console.log("Asynchronous function with callback");
 // Async model with callback
-longOperationAsyncWithCallback(VAL+10, processResult1);
+//longOperationAsyncWithCallback(VAL+10, processResult1);
 
 
-/* console.log("Asynchronous function with promise");
+console.log("Asynchronous function with promise");
 
 // Async model with Promise
 longOperationAsyncWithPromise(VAL+20)   // Promise<Number>
     .then(processResult1);              // Promise<String>
 
-// longOperationAsyncWithPromise("abc")
-//     .then(processResult1)
-//     .catch(processResult0);
+longOperationAsyncWithPromise("abc")
+     .then(processResult1)
+     .catch(processResult0);
 
 // The same as above, but each call is separated.
-// let p = longOperationAsyncWithPromise("abc");
-// p.then(processResult1);
-// p.catch(processResult0);
-*/
+let p = longOperationAsyncWithPromise("abc");
+let p1 = p.then(processResult1);
+p1.catch(processResult0);
+
 // Sync model
 //console.log("Synchronous function");
 //let res = longOperation(VAL);

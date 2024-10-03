@@ -1,34 +1,29 @@
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises';
 
 const INPUT_FILE  = "./aFile.txt";
-const OUTPUT_FILE = "./writeFile.txt";
 
-console.log("BEGIN")
+console.log("BEGIN");
 
-//const p = readFile(INPUT_FILE)
-//p.then(processFile)
-//p.catch(processError)
+let line;
+
+//const p = readFile(INPUT_FILE); // Promise<Buffer>
+//const p1 = p.then(processFile); // Promise<undefined>
+//p.catch(processError);
 
 readFile(INPUT_FILE)
     .then(processFile)
-    .catch(processError)
+    .catch(processError);
 
-console.log("END")
+console.log("--->", line);
+
+console.log("END");
 
 function processFile(fileContent) {
     console.log("File content ready");
     const fileContentStr = fileContent.toString();
+    line = fileContentStr.split("\n")[0];
     console.log(fileContentStr);
-
-    const firstLine = fileContentStr.split('\n')[0];
-
-    writeFile(OUTPUT_FILE, firstLine)
-        .then(confirmWriteFile)
-        .catch(processError);
-    
-    function confirmWriteFile() {
-        console.log("File", OUTPUT_FILE, "written with success!");
-    }
+    console.log(line);
 }
 
 function processError(err) {

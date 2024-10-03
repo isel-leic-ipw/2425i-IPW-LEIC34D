@@ -9,10 +9,10 @@ console.log("BEGIN");
 // Chaining promises
 // --------------------------
 
-readFile(INPUT_FILE)
-    .then(processFirstLine)
-    .then(processWriteFile)
-    .then(confirmWriteFile)
+readFile(INPUT_FILE)        // Promise<Buffer>
+    .then(processFirstLine) // Promise<String>
+    .then(processWriteFile) // Promise<undefined>
+    .then(confirmWriteFile) // Promise<undefined>
     .catch(processError);
 
 console.log("END");
