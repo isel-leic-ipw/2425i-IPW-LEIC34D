@@ -14,14 +14,18 @@
     - `writeFile`: asynchronously writes data to a file, replacing the file if it already exists.
         - https://nodejs.org/api/fs.html#filehandlewritefiledata-options
 
-### Simple Usage: Example
-- Objective of the example:
-    - Read the content of a local file and print it.
-- Available at: [examples/fs-promise/fs-sample.mjs](examples/fs-promise/fs-sample.mjs)
+### Reading and Writing Files
+- **Example 1**:
+    - Objective: read the content of a local file and print it.
+    - Available at: [examples/fs-promise/fs-sample.mjs](examples/fs-promise/fs-sample.mjs)
+- **Example 2**:
+    - Objective: read the first line of a local file and write this line in a new file.
+    - Available at: [examples/fs-promise/fs-read-write.mjs](examples/fs-promise/fs-read-write.mjs)
+
 - Remarks:
-    - readFile returns a promise of Buffer (with the content of the file).
+    - `readFile` returns a promise of Buffer (with the content of the file).
         - `Promise<Buffer>`
-    - writeFile returns a promise with no arguments.
+    - `writeFile` returns a promise with no arguments.
         - `Promise<undefined>`
 
 ### Chaining Promises
@@ -103,12 +107,114 @@
 - Available at: [examples/fetch-examples/fetch-sample2.mjs](examples/fetch-examples/fetch-sample2.mjs)
 
 ### Example 3: Multiple HTTP Requests
-- Objective: make two HTTP requests and get sum of the length of each response.
+- Objective: make two HTTP requests and get the sum of the length of each response.
 - Available at: [examples/fetch-examples/http-requests.mjs](examples/fetch-examples/http-requests.mjs)
 
 
 ---
 
+## Promise Concurrency
+
+- See the [Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#promise_concurrency).
+
+### Promise all
+
+- Fulfills when **all** of the promises fulfill; 
+    - Rejects when **any** of the promises rejects.
+- **Input**: an iterable of promises (*e.g.*, Array).
+- **Return**: a single Promise with an array of the fulfillment values.
+    - In case of rejection, returns the first rejection reason.
+- Usage:
+    ```javascript
+    const promiseArrayValues = Promise.all(iterable);
+    ```
+- An implementation of Promise **all** using then/catch:
+    ```javascript
+    function promiseAll(arrayPromises){
+        const arrayValues = [];
+        let count = 0;
+        let rejected = false;
+        return new Promise((resolve, reject) => {
+            for (let p of arrayPromises){
+                p.then(value => {
+                    arrayValues.push(value);
+                    count++;
+                    if (count == arrayPromises.length)
+                        resolve(arrayValues);
+                }).catch(err => {
+                    if (! rejected){
+                        reject(err);
+                        rejected = true;
+                    }
+                });
+
+            }
+        });
+    }
+    ```
+- Example:
+    - Objective: make multiple HTTP requests and get the sum of the length of each response. 
+    - available at: [examples/fetch-examples/promise-all.js](examples/fetch-examples/promise-all.js).
+
+### Promise any
+
+- Fulfills when **any** of the promises fulfills;
+    - Rejects when **all** of the promises reject.
+- **Input**: an iterable of promises (*e.g.*, Array).
+- **Return**: a single Promise with the first fulfillment value.
+    - In case of rejection, returns an *AggregateError* containing an array of rejection reasons.
+- Usage:
+    ```javascript
+    const promiseFirstValue = Promise.any(iterable);
+    ```
+- An implementation of Promise **any** using then/catch:
+    ```javascript
+    function promiseAny(arrayPromises){
+        let count = 0;
+        let rejectArray = [];
+        return new Promise((resolve, reject) => {
+            for (let p of arrayPromises){
+                p.then(value => resolve(value))
+                .catch(err => {
+                    count++;
+                    rejectArray.push(err);
+                    if (count == arrayPromises.length){
+                        reject(rejectArray);
+                    }
+                });
+
+            }
+        });
+    }
+    ```
+- Example:
+    - Objective: make multiple HTTP requests and get the length of the first response. 
+    - available at: [examples/fetch-examples/promise-any-race.js](examples/fetch-examples/promise--any-race.js).
+
+### Promise race
+
+- Fulfills when **any** of the promises fulfills; 
+    - Rejects when **any** of the promises rejects.
+- **Input**: an iterable of promises (*e.g.*, Array).
+- **Return**: a single Promise with the first fulfillment value or an error, what happens first.
+- Usage:
+    ```javascript
+    const promiseFirst = Promise.race(iterable);
+    ```
+- An implementation of Promise **race** using then/catch:
+    ```javascript
+    function promiseRace(arrayPromises){
+        return new Promise((resolve, reject) => {
+            for (let p of arrayPromises){
+                p.then(p => resolve(p))
+                .catch(err => reject(err));
+            }
+        });
+    }
+    ```
+- Example:
+    - Objective: make multiple HTTP requests and get the first event: in the case of a success, get the length of the response; in the case of a failure, an error. 
+    - available at: [examples/fetch-examples/promise-race.js](examples/fetch-examples/promise-race.js).
+
 ## Async and Await
 
-## Promise all
