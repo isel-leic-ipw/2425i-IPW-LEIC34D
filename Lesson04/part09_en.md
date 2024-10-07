@@ -349,12 +349,12 @@
 
 1. Implement an application that fetch an URL and count the occurrence of a given word in the content response.
 
-2. Implement the async/await version for the example (available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs)) of reading a text file and writing the first line in another file.
+2. Implement the async/await version for the example available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs). The goal is to read a text file and writing the first line in another file.
 
 3. Implement two versions of an application that fetches more than one URL and counts the occurrence of a given word in the content response of each one.
     1. Using Promises explicitly
     2. Using the async/await style
 
-4. Implement two versions of an application to read a JSON file and write in another file an object with a single property named "links". The value is an array with the links of the image fruits from the original object.
+4. Implement two versions of an application to read a JSON file (available at: [examples/fs-promise/fruits.json](examples/fs-promise/fruits.jsons)) and write in another file an object with a single property named "links". The value is an array with the links of the image fruits from the original object.
     1. Using Promises explicitly
     2. Using the async/await style
