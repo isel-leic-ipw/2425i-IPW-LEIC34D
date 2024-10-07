@@ -355,6 +355,6 @@
     1. Using Promises explicitly
     2. Using the async/await style
 
-4. Implement two versions of an application to read a JSON file (available at: [examples/fs-promise/fruits.json](examples/fs-promise/fruits.jsons)) and write in another file an object with a single property named "links". The value is an array with the links of the image fruits from the original object.
+4. Implement two versions of an application to read a JSON file (available at: [examples/fs-promise/fruits.json](examples/fs-promise/fruits.jsons)) and write in another file an object with a single property named "links". The property value is an array with the links of the fruit images from the original object.
     1. Using Promises explicitly
     2. Using the async/await style
