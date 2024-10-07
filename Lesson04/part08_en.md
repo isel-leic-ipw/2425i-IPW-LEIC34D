@@ -151,13 +151,14 @@
 - `setTimeout` is used to simulate an async long operation.
     ```js
     function longOperationAsyncWithPromise(a) {
-        return new Promise(function(resolve, reject) {
-            if(!Number(a)) {
+        return new Promise(function (resolve, reject) {
+            if(!Number(a))
                 reject("A must be a number");
+            else {
+                // Simulating a long operation with setTimeout
+                setTimeout(() => resolve(a.toString()), 3000);
             }
-            // Simulating a long operation with setTimeout
-            setTimeout(() => resolve(a.toString()), 3000); 
-        })
+        });
     }
 
     function processResult(result) {
