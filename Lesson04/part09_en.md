@@ -10,14 +10,14 @@
 - The fs/promises API provides asynchronous file system methods that return promises.
 - Examples of methods:
     - `readFile`: asynchronously reads the entire contents of a file.
-        - https://nodejs.org/api/fs.html#filehandlereadfileoptions
+        - https://nodejs.org/api/fs.html#fspromisesreadfilepath-options
     - `writeFile`: asynchronously writes data to a file, replacing the file if it already exists.
-        - https://nodejs.org/api/fs.html#filehandlewritefiledata-options
+        - https://nodejs.org/api/fs.html#fspromiseswritefilefile-data-options
 
 ### Reading and Writing Files
 - **Example 1**:
     - Objective: read the content of a local file and print it.
-    - Available at: [examples/fs-promise/fs-sample.mjs](examples/fs-promise/fs-sample.mjs)
+    - Available at: [examples/fs-promise/fs-read-print.mjs](examples/fs-promise/fs-read-print.mjs)
 - **Example 2**:
     - Objective: read the first line of a local file and write this line in a new file.
     - Available at: [examples/fs-promise/fs-read-write.mjs](examples/fs-promise/fs-read-write.mjs)
@@ -218,3 +218,143 @@
 
 ## Async and Await
 
+- ECMAScript 2017 introduced the JavaScript keywords `async` and `await`.
+- Async and await allow a new model to handle promises.
+    - The code is asynchronous but structure appears to be synchronous.
+    - Tends to make promises easier to write.
+
+### Async Function
+
+- The keyword `async` before a function makes the function be asynchronous and return a Promise.
+- Syntax:
+    ```javascript
+    async function name(parameters) {
+        statements
+    }
+    ```
+- Example:
+    ```js
+    async function foo(x) {
+        return x;
+    }
+    
+    const p = foo(2);
+    console.log(p);
+    // → Promise { 2 }
+    p.then(v => console.log(v));
+    // → 2
+    ```
+- Equivalent usage without async:
+    ```js
+    function foo(x) {
+        return new Promise(resolve => { 
+                resolve(x);
+            });
+        // The same, with the method resolve:
+        //return Promise.resolve(x); 
+    }
+
+    const p = foo(2);
+    console.log(p);
+    // → Promise { 2 }
+    p.then(v => console.log(v));
+    // → 2
+    ```
+
+### Await
+
+- The await keyword is used to wait for a Promise and get its fulfillment value.
+- It can only be used inside an `async` function or at the top level of a module.
+- Example:
+    ```js
+    function resolveAfter3Seconds(x) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => resolve(x), 3000);
+        });
+    }
+
+    async function f1() {
+        const x = await resolveAfter3Seconds(5);
+        console.log("Value of x is:", x);
+    }
+
+    console.log("BEGIN");
+    f1();
+    console.log("END");
+    // → BEGIN
+    // → END
+    // → Value of x is: 5
+    ```
+- Equivalent example with method `then`:
+    ```js
+    function resolveAfter3Seconds(x) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => resolve(x), 3000);
+        });
+    }
+
+    console.log("BEGIN");
+    resolveAfter3Seconds(10)
+        .then(x => console.log("Value of x is:", x));
+    console.log("END");
+    ```
+
+### Handling Rejected Promises: Try-catch
+- `await` is usually used to unwrap promises by passing a Promise as the expression.
+    - When promise resolve successfully, the await expression returns the fulfilled value.
+    - If the promise is rejected, the await expression **throws the rejected value**.
+- **Try-catch** structure can be used to surround the await expression:
+    ```js
+    function resolveAfterNSeconds(x, time) {
+        return new Promise((resolve, reject) => {
+            if (typeof time !== 'number')
+                reject("time is not a Number!");
+            else
+                setTimeout(() => resolve(x), time*1000);
+        });
+    }
+
+    async function f1() {
+        try {
+            const x = await resolveAfterNSeconds(5, "Three");
+            console.log("Value of x is:", x);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    console.log("BEGIN");
+    f1();
+    console.log("END");
+    // → BEGIN
+    // → END
+    // → time is not a Number!    
+    ```
+
+### Examples with async/await:
+1. Examples with `setTimeout` as async function (and their equivalences with then method):
+    - Available at: [examples/async-await/sample-settimeout.js](examples/async-await/sample-settimeout.mjs)
+
+2. Example with `fetch` as async function:
+    - Objective: get the joke question and present the answer after ~3s.
+    - Available at: [examples/async-await/fetch-sample2.js](examples/async-await/fetch-sample2.mjs)
+
+3. Another example with `fetch` as async function:
+    - Objective: make two HTTP requests and get the sum of the length of each response.
+    - Available at: [examples/async-await/http-requests.js](examples/async-await/http-requests.mjs)
+
+---
+## Exercises
+
+1. Implement an application that fetch an URL and count the occurrence of a given word in the content response.
+
+2. Implement the async/await version for the example (available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs)) of reading a text file and writing the first line in another file.
+
+3. Implement two versions of an application that fetches more than one URL and counts the occurrence of a given word in the content response of each one.
+    1. Using Promises explicitly
+    2. Using the async/await style
+
+4. Implement two versions of an application to read a JSON file and write in another file an object with a single property named "links". The value is an array with the links of the image fruits from the original object.
+    1. Using Promises explicitly
+    2. Using the async/await style
