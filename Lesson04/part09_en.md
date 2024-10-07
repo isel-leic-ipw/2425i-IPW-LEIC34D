@@ -347,7 +347,7 @@
 ---
 ## Exercises
 
-1. Implement an application that fetch an URL and count the occurrence of a given word in the content response.
+1. Implement an application that fetches an URL and counts the occurrence of a given word in the content response.
 
 2. Implement the async/await version for the example available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs). The goal is to read a text file and writing the first line in another file.
 
