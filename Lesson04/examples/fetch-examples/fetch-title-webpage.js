@@ -1,9 +1,9 @@
-const URL = "https://loquentjavascript.net/11_async.html";
+const URL = "https://eloquentjavascript.net/11_async.html";
 
 // Using promises explicitly
-fetch(URL)
-    .then((resp) => resp.text())
-    .then((text) => console.log(getTitle(text)))
+fetch(URL)                                          // Promise<Response>
+    .then((resp) => resp.text())                    // Promise<String>
+    .then((text) => console.log(getTitle(text)))    // Promise<String>
     .catch((err) => console.error("Error!!"));
 
 function getTitle(text){
