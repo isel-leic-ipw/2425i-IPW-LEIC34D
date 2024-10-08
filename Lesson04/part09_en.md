@@ -347,14 +347,16 @@
 ---
 ## Exercises
 
-1. Implement an application that fetches an URL and counts the occurrence of a given word in the content response.
+1. Implement an application that fetches the an URL from the book Eloquent Javascript (e.g., [https://eloquentjavascript.net/11_async.html](https://eloquentjavascript.net/11_async.html)) and print the title page. The title page is a string surrounded by the tags `<title>` and `</title>`.
 
-2. Implement the async/await version for the example available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs). The goal is to read a text file and writing the first line in another file.
+2. Implement an application that fetches an URL and counts the occurrence of a given word in the content response.
 
-3. Implement two versions of an application that fetches more than one URL and counts the occurrence of a given word in the content response of each one.
+3. Implement the async/await version for the example available at: [examples/fs-promise/fs-promise-chaining.mjs](examples/fs-promise/fs-promise-chaining.mjs). The goal is to read a text file and writing the first line in another file.
+
+4. Implement two versions of an application that fetches more than one URL and counts the occurrence of a given word in the content response of each one.
     1. Using Promises explicitly
     2. Using the async/await style
 
-4. Implement two versions of an application to read a JSON file (available at: [examples/fs-promise/fruits.json](examples/fs-promise/fruits.jsons)) and write in another file an object with a single property named "links". The property value is an array with the links of the fruit images from the original object.
+5. Implement two versions of an application to read a JSON file (available at: [examples/fs-promise/fruits.json](examples/fs-promise/fruits.jsons)) and write in another file an object with a single property named "links". The property value is an array with the links of the fruit images from the original object.
     1. Using Promises explicitly
     2. Using the async/await style
