@@ -3,7 +3,8 @@ const URL = "https://eloquentjavascript.net/11_async.html";
 // Using promises explicitly
 fetch(URL)                                          // Promise<Response>
     .then((resp) => resp.text())                    // Promise<String>
-    .then((text) => console.log(getTitle(text)))    // Promise<String>
+    .then((text) => getTitle(text))                 // Promise<String>
+    .then((title) => console.log(title))            // Promise<undefined>
     .catch((err) => console.error("Error!!"));
 
 function getTitle(text){
