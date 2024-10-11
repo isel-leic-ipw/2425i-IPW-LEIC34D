@@ -6,6 +6,7 @@ const urlArray = [
 
 promiseArray = urlArray.map(url => fetch(url));
 
+// Promise<Response>[] => Promise<String[]>
 Promise.all(promiseArray)
     .then(arrResp => {
         const arrPromiseText = [];
@@ -17,10 +18,11 @@ Promise.all(promiseArray)
     .then(totalLen => console.log(totalLen))
     .catch(err => console.error("ERROR!"));
 
-// Promise.all(promiseArray)
-//     .then(arrResp => Promise.all(arrResp.map(resp => resp.text())))
-//     .then(arrText => arrText.reduce((t1, t2) => t1.length + t2.length))
-//     .then(totalLen => console.log(totalLen));
+// Promise<Response>[] => Promise<String[]>
+// Promise.all(promiseArray) 
+//      .then(arrResp => Promise.all(arrResp.map(resp => resp.text())))
+//      .then(arrText => arrText.reduce((t1, t2) => t1.length + t2.length))
+//      .then(totalLen => console.log(totalLen));
 
 function promiseAll(arrayPromises){
     const arrayValues = [];

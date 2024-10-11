@@ -8,7 +8,7 @@ async function showJoke(){
         setTimeout(() => { console.log(obj.punchline); }, 3000);
     }
     catch (e){
-        console.log("Error");
+        console.log("Error", e);
     }
 }
 

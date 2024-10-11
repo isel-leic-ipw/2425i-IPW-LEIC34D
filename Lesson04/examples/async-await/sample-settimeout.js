@@ -36,23 +36,23 @@ async function f3() { // async function
 
 console.log("BEGIN");
 
-//f1();
+f1();
 //f2();
 //f3();
 
 // Same as Example 1:
-resolveAfter3Seconds(getRandomInt())
-    .then(x => console.log("Value of x is:", x));
+//resolveAfter3Seconds(getRandomInt())
+//   .then(x => console.log("Value of x is:", x));
 
 // Same as Example 2:
 // Wait 3 seconds and print a number.
 // Then, wait more 3 seconds and print another number.
 // resolveAfter3Seconds(getRandomInt())
-//     .then(x => {
-//             console.log("Value of x is:", x);
-//             return(resolveAfter3Seconds(getRandomInt()));
-//         })
-//     .then(x => console.log("Value of x is:", x));
+//      .then(x => {
+//              console.log("Value of x is:", x);
+//              return(resolveAfter3Seconds(getRandomInt()));
+//          })
+//      .then(x => console.log("Value of x is:", x));
 
 // This example includes a third waiting...
 // resolveAfter3Seconds(getRandomInt())

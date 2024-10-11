@@ -4,7 +4,7 @@ const URL = "https://eloquentjavascript.net/11_async.html";
 fetch(URL)                                          // Promise<Response>
     .then((resp) => resp.text())                    // Promise<String>
     .then((text) => getTitle(text))                 // Promise<String>
-    .then((title) => console.log(title))            // Promise<undefined>
+    .then((title) => console.log("[Promise explicitly]", title)) // Promise<undefined>
     .catch((err) => console.error("Error!!"));
 
 function getTitle(text){
@@ -19,7 +19,7 @@ async function showTitleWebPage(url) {
         const rsp = await fetch(url);                // Response
         const text = await rsp.text();               // String  
         const title = getTitle(text);                // String
-        console.log(title);                          // undefined  
+        console.log("[Async/await]", title);         // undefined  
     }
     catch (e){
         console.error("Error!!", e);

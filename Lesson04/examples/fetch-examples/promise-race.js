@@ -1,7 +1,7 @@
 const urlArray = [
     "https://eloquentjavascript.net/05_higher_order.html",
     "https://eloquentjavascript.net/11_async.html"
-    , "https://not_exist"
+    //, "https://not_exist"
 ];
 
 const promiseArray = urlArray.map(url => fetch(url));
