@@ -189,7 +189,7 @@
     ```
 - Example:
     - Objective: make multiple HTTP requests and get the length of the first response. 
-    - available at: [examples/fetch-examples/promise-any-race.js](examples/fetch-examples/promise--any-race.js).
+    - Available at: [examples/fetch-examples/promise-any.js](examples/fetch-examples/promise--any.js).
 
 ### Promise race
 
@@ -357,6 +357,6 @@
     1. Using Promises explicitly
     2. Using the async/await style
 
-5. Implement two versions of an application to read a JSON file (available at: [examples/fs-promise/fruits.json](examples/fs-promise/fruits.jsons)) and write in another file an object with a single property named "links". The property value is an array with the links of the fruit images from the original object.
+5. Implement two versions of an application to read a JSON file (available at: [examples/fs-promise/fruits.json](examples/fs-promise/fruits.json)) and write in another file an object with a single property named "links". The property value is an array with the links of the fruit images from the original object.
     1. Using Promises explicitly
     2. Using the async/await style
