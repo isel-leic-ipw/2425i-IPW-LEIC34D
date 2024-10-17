@@ -197,8 +197,7 @@
     GET /pub/WWW/TheProject.html HTTP/1.1
     Host: www.w3.org
     ```
-- **absoluteURI**: required when the request is being made to a
-   proxy.
+- **absoluteURI**: required when the request is being made to a proxy.
     - *e.g.*, `GET http://www.w3.org/pub/WWW/TheProject.html HTTP/1.1`
 - **authority**: used with CONNECT method.
 
@@ -309,3 +308,8 @@
         - https://chromewebstore.google.com/detail/restman
 - View response:
     - Inspect mode in the browser, tab *Network*.
+
+## Request Examples with Fetch
+
+- HTTP GET: [examples/test-http-get-fetch.mjs](examples/test-http-get-fetch.mjs)
+- HTTP POST: [examples/test-http-post-fetch.mjs](examples/test-http-post-fetch.mjs)
