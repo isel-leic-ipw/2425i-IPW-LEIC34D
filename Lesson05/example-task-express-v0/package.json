@@ -1,0 +1,17 @@
+{
+  "name": "example-hello-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node tasks-express.mjs",
+    "start-dev": "nodemon tasks-express.mjs"
+  },
+  "author": "Fernanda Passos",
+  "license": "ISC",
+  "description": "Hello World Express",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1"
+  }
+}

@@ -1,0 +1,44 @@
+### Insert a task
+
+POST http://localhost:8000/tasks HTTP/2
+Content-Type: application/json
+
+{
+    "title": "Study HTTP",
+    "description": "Read the documentation."
+}
+
+### Insert a task
+
+POST http://localhost:8000/tasks HTTP/2
+Content-Type: application/json
+
+{
+    "title": "Do class exercise",
+    "description": "Implement the task application."
+}
+
+### Get all tasks
+
+GET http://localhost:8000/tasks HTTP/2
+Origin: https://scholar.google.com.br/
+
+### Get task 1
+
+GET http://localhost:8000/tasks/1 HTTP/2
+
+
+### Delete task 1
+
+DELETE http://localhost:8000/tasks/1 HTTP/2
+
+
+### Update task 1
+
+PUT http://localhost:8000/tasks/1 HTTP/2
+Content-Type: application/json
+
+{
+    "title": "Do class exercise",
+    "description": "Reimplement the task application!!!"
+}
