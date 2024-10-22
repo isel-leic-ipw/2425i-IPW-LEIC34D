@@ -1,0 +1,16 @@
+{
+  "name": "example-hello-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node hello-world-express.mjs",
+    "start-dev": "node hello-world-express.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fernanda Passos",
+  "license": "ISC",
+  "description": "Hello World Express",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
