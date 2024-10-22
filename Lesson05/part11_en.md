@@ -418,9 +418,19 @@ app.put("/tasks/:id", updateTask);
 - Next versions (in next classes):
     - Task data are persistent, in a database (*e.g.*, Elastic Search).
 
+---
+
 ## Exercises
 
 1. Implement a server books API with Express module.
     - A book should have a name, the number of pages, and the authors' names.
     - Book data must be in memory.
+    - Example:
+        ```json
+        {
+            "name": "A História Interminável",
+            "authors": ["Michael Ende"],
+            "pages": 348
+        }
+        ```
  
