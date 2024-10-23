@@ -16,7 +16,7 @@ app.listen(PORT, () =>
 
 function sendHello(req, res){
     console.log(req.headers);
-    res.send("Hello World2!");
+    res.send("Hello World!");
 }
 
 // Testing: go to the browser and access the URL: http://localhost:8000/

@@ -8,7 +8,7 @@ Content-Type: application/json
     "description": "Read the documentation."
 }
 
-### Insert a task
+### Insert another task
 
 POST http://localhost:8000/tasks HTTP/2
 Content-Type: application/json

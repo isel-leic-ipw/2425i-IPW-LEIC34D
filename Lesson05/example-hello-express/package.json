@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node hello-world-express.mjs",
-    "start-dev": "node hello-world-express.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-dev": "nodemon hello-world-express.mjs",
+    "test": "mocha"
   },
   "author": "Fernanda Passos",
   "license": "ISC",
