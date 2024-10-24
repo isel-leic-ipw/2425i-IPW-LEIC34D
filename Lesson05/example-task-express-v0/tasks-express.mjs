@@ -40,7 +40,7 @@ function getTask(req, res){
       res.status(404).end();
 }
 
-async function getAllTasks(req, res){
+function getAllTasks(req, res){
   res.set("Content-Type", "application/json");
   res.send(JSON.stringify(TASKS));
   //res.json(tasks);
