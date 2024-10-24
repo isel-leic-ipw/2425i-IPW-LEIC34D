@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 
 const PORT = 8000;  // Port number for the tests
 const app = express(); // Express function returns an app
@@ -7,7 +6,6 @@ const app = express(); // Express function returns an app
 const TASKS = [];
 let currentId = TASKS.length;
 
-app.use(cors());
 app.use(express.json());
 
 // get task by id
@@ -62,9 +60,11 @@ function addTask(req, res){
 }
 
 function deleteTask(req, res){
-  let task = TASKS.find(task => task.id == req.params.id);
-  if (task){
-    TASKS.pop(task);
+  let taskIndex = TASKS.findIndex(task => task.id == req.params.id);
+  if (taskIndex != -1){
+    let task = TASKS[taskIndex];
+    // Usage: array.splice(startIndex, deleteCount)
+    TASKS.splice(taskIndex, 1);
     res.json(task).end();
   }
   else{
