@@ -55,8 +55,8 @@ function addTask(req, res){
   }
   TASKS.push(task);
   currentId++;
+  res.status(201);
   res.send(`Task id ${task.id} was added!`);
-  res.status(201).end();
 }
 
 function deleteTask(req, res){
