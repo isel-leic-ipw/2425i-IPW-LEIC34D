@@ -337,9 +337,11 @@ app.put("/tasks/:id", updateTask);
 - Method `find()` of an array returns the task with an id equal to `req.params.id`.
     ```javascript
     function deleteTask(req, res){
-        let task = TASKS.find(task => task.id == req.params.id);
-        if (task){
-            tasks.pop(task);
+        let taskIndex = TASKS.findIndex(task => task.id == req.params.id);
+        if (taskIndex != -1){
+            let task = TASKS[taskIndex];
+            // Usage: array.splice(startIndex, deleteCount)
+            TASKS.splice(taskIndex, 1);
             res.json(task).end();
         }
         else{
@@ -385,8 +387,8 @@ app.put("/tasks/:id", updateTask);
         // Add the task:
         TASKS.push(task);
         currentId++;
+        res.status(201);
         res.send(`Task id ${task.id} was added!`);
-        res.status(201).end();
     }
     ```
 
