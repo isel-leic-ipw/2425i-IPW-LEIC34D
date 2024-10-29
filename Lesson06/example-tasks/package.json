@@ -1,0 +1,16 @@
+{
+  "name": "example-tasks",
+  "description": "Simple Tasks manager API (with modules)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node tasks-server.mjs",
+    "start-dev": "nodemon tasks-server.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fernanda Passos",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
