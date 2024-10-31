@@ -5,3 +5,4 @@ This repository provides the materials used in the classroom of the LEIC 34D cla
 ## Important Links
 
 - [1st practical assignment](https://github.com/isel-leic-ipw/2425i-IPW-LEIC33D/wiki/IPW_IP-2425-1-A1)
+- [2st practical assignment](https://github.com/isel-leic-ipw/2425i-IPW-LEIC33D/wiki/IPW_IP-2425-1-A2)
