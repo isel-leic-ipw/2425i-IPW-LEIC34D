@@ -1,0 +1,50 @@
+### User 2 (testing app)
+@token = f1d1cdbc-97f0-41c4-b206-051250684b19
+
+### Insert a task
+
+POST http://localhost:8000/tasks HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Study HTTP",
+    "description": "Read the documentation."
+}
+
+### Insert a task
+
+POST http://localhost:8000/tasks HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Do class exercise",
+    "description": "Implement the task application."
+}
+
+### Get all tasks
+
+GET http://localhost:8000/tasks HTTP/2
+Authorization: Bearer {{token}}
+
+### Get task 1
+
+GET http://localhost:8000/tasks/2 HTTP/2
+Authorization: Bearer {{token}}
+
+### Update task 1
+
+PUT http://localhost:8000/tasks/1 HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Do class exercise",
+    "description": "Reimplement the task application!!!"
+}
+
+### Delete task 1
+
+DELETE http://localhost:8000/tasks/1 HTTP/2
+Authorization: Bearer {{token}}
