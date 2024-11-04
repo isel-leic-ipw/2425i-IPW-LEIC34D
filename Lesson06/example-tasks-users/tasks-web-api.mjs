@@ -57,9 +57,12 @@ export function updateTask(req, res){
 
 // Auxiliary module function
 function getToken(req) {
-  const tokenParts = req.get("Authorization").split(" ");
-  if(tokenParts && tokenParts[0] == "Bearer") {
-      return tokenParts[1];
+  const authToken = req.get("Authorization");
+  if (authToken){
+    const tokenParts = authToken.split(" ");
+    if(tokenParts && tokenParts[0] == "Bearer") {
+        return tokenParts[1];
+    }
   }
 }
 
