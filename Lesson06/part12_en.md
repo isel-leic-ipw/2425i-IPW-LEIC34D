@@ -602,4 +602,31 @@
                     schema:
                         oneOf:
                         - $ref: "#/components/schemas/MissingParameter"
-                        - $ref: "#/components/schemas/InvalidBody"    
+                        - $ref: "#/components/schemas/InvalidBody"  
+                        
+### Express Integration
+
+- Consider that the task API specification is in `./docs/tasks-api.yaml`.
+- The following modules are useful:
+    - `swagger-ui-express`: generated API docs from express, based on a Swagger file (json or yaml).
+    - `yamljs`: load YAML file with the API specification.
+- The result is an interactive documentation for your API hosted from your API server via a route.
+- Install with NPM:
+    ```bash
+    npm install swagger-ui-express yamljs
+    ```
+- In file `tasks-server.mjs`, add the use of these modules such as:
+    ```javascript
+    import swaggerUi from 'swagger-ui-express';
+    import yaml from 'yamljs';
+
+    const PORT = 8000;  // Port number for the tests
+    const app = express(); // Express function returns an app
+
+    const swaggerDocument = yaml.load('./docs/tasks-api.yaml');
+
+    app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    ```
+
+- With the application server running, access to the interactive documentation in the browser:
+    - http://localhost/8000/doc
