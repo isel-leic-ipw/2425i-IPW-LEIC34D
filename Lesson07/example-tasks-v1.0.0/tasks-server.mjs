@@ -30,10 +30,10 @@ app.get("/tasks", tasksAPI.getAllTasks);
 app.post("/tasks", tasksAPI.addTask);
 
 // delete task by id
-app.delete("/tasks/:taskId?", tasksAPI.deleteTask);
+app.delete("/tasks/:taskId", tasksAPI.deleteTask);
 
 // update task by id
-app.put("/tasks/:taskId?", tasksAPI.updateTask);
+app.put("/tasks/:taskId", tasksAPI.updateTask);
 
 // App listening...
 app.listen(PORT, () =>
