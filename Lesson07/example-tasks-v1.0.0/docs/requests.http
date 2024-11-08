@@ -2,7 +2,6 @@
 @token = f1d1cdbc-97f0-41c4-b206-051250684b19
 
 ### Insert a task
-
 POST http://localhost:8000/tasks HTTP/2
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -13,7 +12,6 @@ Authorization: Bearer {{token}}
 }
 
 ### Insert a task
-
 POST http://localhost:8000/tasks HTTP/2
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -24,17 +22,14 @@ Authorization: Bearer {{token}}
 }
 
 ### Get all tasks
-
 GET http://localhost:8000/tasks HTTP/2
 Authorization: Bearer {{token}}
 
 ### Get task 1
-
-GET http://localhost:8000/tasks/2 HTTP/2
+GET http://localhost:8000/tasks/1 HTTP/2
 Authorization: Bearer {{token}}
 
 ### Update task 1
-
 PUT http://localhost:8000/tasks/1 HTTP/2
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -44,7 +39,28 @@ Authorization: Bearer {{token}}
     "description": "Reimplement the task application!!!"
 }
 
-### Delete task 1
+### Delete task 7
+DELETE http://localhost:8000/tasks/7 HTTP/2
+Authorization: Bearer {{token}}
 
-DELETE http://localhost:8000/tasks/1 HTTP/2
+
+### ERRORS
+
+### Get tasks without token
+GET http://localhost:8000/tasks HTTP/2
+
+### Get task with inexistent id
+GET http://localhost:8000/tasks/100 HTTP/2
+Authorization: Bearer {{token}}
+
+### Get task with invalid user
+GET http://localhost:8000/tasks/2 HTTP/2
+Authorization: Bearer {{token}}
+
+### Get task with invalid parameter (DELETE and PUT should work too).
+GET http://localhost:8000/tasks/a HTTP/2
+Authorization: Bearer {{token}}
+
+### Final get all tasks to verify if change something
+GET http://localhost:8000/tasks HTTP/2
 Authorization: Bearer {{token}}

@@ -21,22 +21,20 @@ function nextId(){
 }
 
 export function addUser(username){
-  if (USERS.find(user => username == user.name)){
-    return false;
-  }
-  else {
-    let user = {
-      id: nextId(),
-      token: crypto.randomUUID(),
-      name: username
-    };
-    USERS.push(user);
-    return true;
-  }
+  // TODO: need to verify if username already exists
+  // in the array USERS and, then, indicate an error.
+  let user = {
+    id: nextId(),
+    token: crypto.randomUUID(),
+    name: username
+  };
+  USERS.push(user);
+  return user.token;
 }
 
 export function getUserId(token){
   let user = USERS.find(user => user.token == token);
   if (user)
     return user.id;
+  // TODO: need to indicate an error if user does not exist.
 }

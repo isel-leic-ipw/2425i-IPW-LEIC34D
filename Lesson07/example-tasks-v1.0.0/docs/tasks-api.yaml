@@ -2,6 +2,7 @@ openapi: 3.0.1
 info:
   title: Tasks API
   description: This is a simple API for managing tasks
+    without handling most of errors (next versions will attend this).
   contact:
     email: email@isel.pt
   license:
@@ -46,9 +47,6 @@ paths:
                   token:
                     type: string
                     format: uuid
-        400:
-          description: Invalid input, object invalid
-          content: {}
   /tasks:
     description: Resource that contains all Tasks
     get:
@@ -57,28 +55,6 @@ paths:
       summary: get Tasks
       description: Get all tasks from an specified user (by token).
       operationId: getAllTasks
-      # parameters:
-      #   - name: keyword
-      #     in: query
-      #     description: Query to match in task title
-      #     schema:
-      #       type: string
-      #     required: false
-      #   - name: s
-      #     in: query
-      #     description: number of tasks to return
-      #     schema:
-      #       default: 30
-      #       minimum: 0
-      #       type: integer
-      #   - name: p
-      #     in: query
-      #     description: The page number
-      #     schema:
-      #       maximum: 50
-      #       minimum: 0
-      #       default: 1
-      #       type: integer
       responses:
         200:
           description: In case of success, returns a list of tasks.
@@ -88,8 +64,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Task"
-        400:
-          $ref: "#/components/responses/400BadRequest"
+        401:
+          $ref: "#/components/responses/401Unauthorized"
     post:
       tags:
         - Tasks
@@ -111,9 +87,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/NewTaskCreated"
-        400:
-          description: Invalid input, object invalid
-          content: {}
+        400: # Post body is invalid
+          $ref: "#/components/responses/400BadRequest"
+        401: # User is not found or missing token, unauthorized
+          $ref: "#/components/responses/401Unauthorized"
   /tasks/{taskId}:
     description: The resource that represents one Task
     get:
@@ -142,6 +119,8 @@ paths:
           $ref: "#/components/responses/400BadRequest"
         404:
           $ref: "#/components/responses/404NotFound"
+        401: # User is not found or missing token, unauthorized
+          $ref: "#/components/responses/401Unauthorized"        
     put:
       tags:
         - Tasks
@@ -167,6 +146,10 @@ paths:
           content: {}
         404:
           $ref: "#/components/responses/404NotFound"
+        400:
+          $ref: "#/components/responses/400BadRequest"
+        401: # User is not found or missing token, unauthorized
+          $ref: "#/components/responses/401Unauthorized"
     delete:
       tags:
         - Tasks
@@ -188,6 +171,8 @@ paths:
           $ref: "#/components/responses/400BadRequest"
         404:
           $ref: "#/components/responses/404NotFound"
+        401: # User is not found or missing token, unauthorized
+          $ref: "#/components/responses/401Unauthorized"
 components:
   securitySchemes:
     bearerAuth: # arbitrary name for the security scheme
@@ -238,7 +223,26 @@ components:
           example: Task with id 123 created with success
         task:
           $ref: "#/components/schemas/Task"
+
     MissingParameter:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 4
+        error:
+          type: string
+          example: "Missing required parameter"
+    InvalidBody:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 2
+        error:
+          type: string
+          example: "Invalid body content"
+    NotFound:
       type: object
       properties:
         code:
@@ -246,23 +250,34 @@ components:
           example: 1
         error:
           type: string
-          example: "Missing required parameter"
-    InvalidBody:
+          example: "Task with id 1 not found"
+    MissingToken:
       type: object
       properties:
+        code:
+          type: integer
+          example: 3
         error:
           type: string
-          example: "Invalid body content"
-    NotFound:
+          example: "Missing token."
+    Unauthorized:
       type: object
       properties:
-        uri:
+        code:
+          type: integer
+          example: 5
+        error:
           type: string
-          format: uri
-          example: "/tasks/1"
-        description:
+          example: "User 1 has no authorization."
+    UserNotFound:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 6
+        error:
           type: string
-          example: "Task with id 1 not found"
+          example: "User not found."
   responses:
     404NotFound:
       description: "Resource not found"
@@ -278,3 +293,12 @@ components:
             oneOf:
               - $ref: "#/components/schemas/MissingParameter"
               - $ref: "#/components/schemas/InvalidBody"
+    401Unauthorized:
+      description: "Access to the resource is unauthorized."
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: "#/components/schemas/MissingToken"
+              - $ref: "#/components/schemas/Unauthorized"
+              - $ref: "#/components/schemas/UserNotFound"
