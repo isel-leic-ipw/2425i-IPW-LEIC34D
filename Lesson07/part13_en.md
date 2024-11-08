@@ -5,8 +5,9 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
 2. Adjust the API code to comply with the OpenAPI specification.
 3. Include the Unauthorized status code (401) in the OpenAPI specification, related to the missing token.
     - Implement token missing check in web app API to comply with the 401 Unauthorized status code.
-5. Implement a module for errors and use try-catch structure.
-6. Refactor data module with asynchronous operations.
+4. Implement modules for errors (internal and HTTP) and use promise-catch structure to handle the errors.
+5. Refactor data module with asynchronous operations.
+    - Other modules may change too.
 
 ## 1. Directory Organization
 
@@ -20,7 +21,7 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
          ├─── package.json
          ├─── tasks-server.mjs
          ├─── docs/
-         |    └─── tasks-api-yaml
+         |    └─── tasks-api.yaml
          ├─── commons/
          ├─── data/
          |    └─── tasks-data.mjs
@@ -81,24 +82,21 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
             - username
         properties:
             username:
-            type: string
-            example: asilva    
+                type: string
+                example: asilva    
     ```
 - The code should be:
     ```javascript
-    export function addUser(req, res){
-        const userToken = usersServices.addUser(req.body.username);
-        if (userToken){
-            res.status(201);
-            res.send({token: userToken});
-        }
-        else{
-            res.status(400);
-            res.send({
-                code: 1,
-                error: "Body is invalid."
-            });
-        }
+    export function addUser(username){
+        // TODO: need to verify if username already exists
+        // in the array USERS and, then, indicate an error.
+        let user = {
+            id: nextId(),
+            token: crypto.randomUUID(),
+            name: username
+        };
+        USERS.push(user);
+        return user.token;
     }
     ```
 
@@ -118,13 +116,13 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
             operationId: getAllTasks
             responses:
                 200:
-                description: In case of success, returns a list of tasks.
-                content:
-                    application/json:
-                    schema:
-                        type: array
-                        items:
-                            $ref: "#/components/schemas/Task"
+                    description: In case of success, returns a list of tasks.
+                    content:
+                        application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/Task"
     ```
 - OpenAPI `Task` component:
     ```yaml
@@ -156,9 +154,10 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
     ```
 - The corresponding code should be:
     ```javascript
-    function getAllTasks(req, res){
-        const userToken = getToken(req);
-        res.json(tasksServices.getAllTasks(userToken));
+    export function getAllTasks(userToken){
+        const userId = usersServices.getUserId(userToken);
+        // TODO: need to verify if userId exists.
+        return tasksServices.getAllTasks(userId);
     }
     ```
     - This code complies with the HTTP response specification because `tasksServices.getAllTasks()` returns an object such as:
@@ -196,7 +195,7 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
                 content:
                 application/json:
                     schema:
-                    $ref: "#/components/schemas/NewTask"
+                        $ref: "#/components/schemas/NewTask"
             responses:
                 201:
                 description: Task created
@@ -205,7 +204,7 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
                     schema:
                         $ref: "#/components/schemas/NewTaskCreated"
                 400: # Post body is invalid
-                $ref: "#/components/responses/400BadRequest"
+                    $ref: "#/components/responses/400BadRequest"
             
     ```
 - OpenAPI `Task` component:
@@ -494,6 +493,15 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
                     error:
                         type: string
                         example: "User 1 has no authorization."
+            UserNotFound:
+                type: object
+                properties:
+                    code:
+                        type: integer
+                        example: 6
+                    error:
+                        type: string
+                        example: "User not found."
     responses:
         401Unauthorized:
             description: "Access to the resource is unauthorized."
@@ -503,6 +511,7 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
                     oneOf:
                         - $ref: "#/components/schemas/MissingToken"
                         - $ref: "#/components/schemas/Unauthorized"
+                        - $ref: "#/components/schemas/UserNotFound"
     ```
 
 ### Implementing Token Missing
@@ -522,11 +531,14 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
         return function (req, res){
             const token = getToken(req);
             if (! token){
-                res.status(401).send({error: "Missing token!"});
-                return;
+                res.status(401);
+                return res.send({
+                    code: 3,
+                    error: "Missing Token"
+                });
             }
             req.userToken = token;
-            operation(req, res);
+            return operation(req, res);
         };
     }
     ```
@@ -547,111 +559,9 @@ This lesson consists of showing some improvements of the **Tasks Web API** (our 
         }
         ```
 
-## 4. Handling Errors
+## Code (Version 1.0.0)
+- The project of the code implemented until now is available at:
+    - [example-tasks-v1.0.0](example-tasks-v1.0.0/)
 
-- To handling errors, we will use now JavaScript structures for this propose.
-    - `throw`: throws a defined error.
-    - `try-catch` structure:
-        - tries to execute an operation surrounded by `try` structure and catches an error, if any part of this operation throws an error.
-- Methodology:
-    1. Define internal expected errors, with internal id code (*e.g.*, 3);
-    2. Map internal error to HTTP status code error;
-    3. 
-
-
-### Expected Errors
-- General:
-    - MISSING_TOKEN: Missing token (401 Unauthorized).
-    - default: Server internal error (500 Internal Error).
-- `addUser(username)`:
-    - INVALID_BODY: Username already exists, body is invalid (400 Bad Request).
-- `getAllTasks(userToken)`:
-    - USER_NOT_FOUND: User is not found (401 Unauthorized).
-- `getTask(taskId, userToken)`, `deleteTask(taskId, userToken)`:
-    - USER_NOT_FOUND: User is not found (401 Unauthorized).
-    - TASK_NOT_FOUND: Task is not found (404 Not Found).
-    - NOT_AUTHORIZED: User has no access to the provided task (401 Unauthorized).
-    - INVALID_PARAMETER: taskId is invalid, parameter is invalid (400 Bad Request).
-- `update(taskId, newTask, userToken)`:
-    - USER_NOT_FOUND: User is not found (401 Unauthorized).
-    - TASK_NOT_FOUND: Task is not found (404 Not Found).
-    - NOT_AUTHORIZED: User has no access to the provided task (401 Unauthorized).
-    - INVALID_PARAMETER: taskId is invalid, parameter is invalid (400 Bad Request).
-    - INVALID_BODY: Body is invalid (400 Bad Request).
-
-### Common Errors
-
-- A module in `commons/errors.mjs`:
-    ```javascript
-    export const INTERNAL_ERROR_CODES = {
-        INVALID_PARAMETER: 1,
-        INVALID_BODY: 2,
-        TASK_NOT_FOUND: 3,
-        USER_NOT_FOUND: 4,
-        NOT_AUTHORIZED: 5,
-        MISSING_TOKEN: 6
-    };
-
-    export const errors = {
-        INVALID_PARAMETER: (argName) => {
-            return new Error(INTERNAL_ERROR_CODES.INVALID_PARAMETER, `Invalid parameter ${argName}`);
-        },
-        INVALID_BODY: (argName) => {
-            return new Error(INTERNAL_ERROR_CODES.INVALID_BODY, `Invalid body ${argName}`);
-        },
-        TASK_NOT_FOUND: (what) => { 
-            return new Error(INTERNAL_ERROR_CODES.NOT_FOUND,`Task ${what} not found`);
-        },
-        USER_NOT_FOUND: () => { 
-            return new Error(INTERNAL_ERROR_CODES.USER_NOT_FOUND,`User not found`);
-        },
-        NOT_AUTHORIZED: (who, what) => { 
-            return new Error(INTERNAL_ERROR_CODES.NOT_AUTHORIZED,`${who} has no access to ${what}`);
-        },
-        MISSING_TOKEN: () => { 
-            return new Error(INTERNAL_ERROR_CODES.MISSING_TOKEN,`Missing token`);
-        }
-    }
-
-    // Constructor function
-    function Error(code, description) {
-        this.code = code;
-        this.description = description;
-    }
-    ```
-
-
-### Internal Errors to HTTP Status Code Converter
-
-- In web/api, include a module to convert internal API errors to HTTP status code error.
-- The file name can be: `web/api/errors-to-http-responses.mjs`.
-
-    ```javascript
-    import { INTERNAL_ERROR_CODES } from '../../common/errors.mjs';
-
-    function HttpResponse(status, e) {
-        this.status = status;
-        this.body = {
-            code: e.code, // internal code
-            error: e.description
-        };
-    }
-
-    export default function(e) {
-        switch(e.code) {
-            case INTERNAL_ERROR_CODES.INVALID_PARAMETER: return new HttpResponse(400, e);
-            case INTERNAL_ERROR_CODES.INVALID_BODY: return new HttpResponse(400, e);
-            case INTERNAL_ERROR_CODES.TASK_NOT_FOUND: return new HttpResponse(404, e);
-            case INTERNAL_ERROR_CODES.USER_NOT_FOUND: return new HttpResponse(401, e);
-            case INTERNAL_ERROR_CODES.NOT_AUTHORIZED: return new HttpResponse(401, e);
-            case INTERNAL_ERROR_CODES.MISSING_TOKEN: return new HttpResponse(401, e)
-            default: return new HttpResponse(500, "Internal server error. Contact your teacher!");
-        }
-    }
-    ```
-
-### Usage of the Converter
-
-- In `services/tasks-service.mjs`, such as:
-
-## 5. Data Module
+## Next Lesson
+- Next lesson, we will see the implementation of the rest of the improvement: part 4 and 5.
