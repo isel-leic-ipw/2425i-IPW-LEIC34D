@@ -10,30 +10,6 @@ export const addTask = processRequest(local_addTask);
 export const updateTask = processRequest(local_updateTask);
 export const deleteTask = processRequest(local_deleteTask);
 
-/*export function authorize(req, res, next){
-    const token = getToken(req);
-    //console.log("Token:", token);
-    if (token){
-      req.userToken = token;
-      next();
-    }
-    else {
-      next(errors.MISSING_TOKEN());
-    }
-}*/
-
-/*export function handlerError (err, req, res, next) {
-  console.log("ERROR:", err);
-  getResponseError(res, err);
-}*/
-
-/*
-function processRequest(operation){
-  return function (req, res, next){
-    return operation(req, res, next)
-    .catch(next);
-  }
-}*/
 
 export function getResponseError(res, err){
   //console.log(err);

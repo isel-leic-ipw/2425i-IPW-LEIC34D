@@ -66,7 +66,8 @@ export function updateTask(taskId, newTask, userToken){
       if (! task)
         return Promise.reject(errors.TASK_NOT_FOUND(taskId));
       if (! tasksData.verifyNewTaskProperties(newTask))
-        return Promise.reject(errors.INVALID_BODY("new Task"));  
+        return Promise.reject(errors.INVALID_BODY("new Task"));
+      newTask.userId = task.userId; // include the userId 
       return tasksData.updateTask(task.id, newTask);
     });
 }

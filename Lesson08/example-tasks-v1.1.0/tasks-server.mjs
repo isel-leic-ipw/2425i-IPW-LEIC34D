@@ -14,9 +14,6 @@ app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Parser the body to JSON
 app.use(express.json());
 
-// Authorize a user by a given token
-//app.use("/tasks*", tasksAPI.authorize);
-
 // add user
 app.post("/users", usersAPI.addUser);
 
@@ -34,8 +31,6 @@ app.delete("/tasks/:taskId?", tasksAPI.deleteTask);
 
 // update task by id
 app.put("/tasks/:taskId?", tasksAPI.updateTask);
-
-/*app.use(tasksAPI.handlerError);*/
 
 // App listening...
 app.listen(PORT, () =>
