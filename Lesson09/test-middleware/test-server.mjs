@@ -24,7 +24,3 @@ function errorHandler(err, req, res, next){
     res.status(404);
     res.send(err);
 }
-
-//git remote -rename
-
-//coordenador do curso, comissão
