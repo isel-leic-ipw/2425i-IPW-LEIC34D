@@ -1,0 +1,108 @@
+### User 2 (testing app)
+@token = b61cc2a8-0294-4422-a8d8-a02c2f99f183
+@hostnameElastic=localhost
+@port=9200
+
+### TASKS ###
+
+### Delete tasks index:
+DELETE /tasks
+Host: {{hostnameElastic}}:{{port}}
+
+### Create tasks index:
+PUT /tasks
+Host: {{hostnameElastic}}:{{port}}
+
+### List documents from /tasks:
+GET /tasks/_search
+Host: {{hostnameElastic}}:{{port}}
+
+### Delete users index:
+DELETE /users
+Host: {{hostnameElastic}}:{{port}}
+
+### Create users index:
+PUT /users
+Host: {{hostnameElastic}}:{{port}}
+
+### List documents from /users:
+GET /users/_search
+Host: {{hostnameElastic}}:{{port}}
+
+
+### TESTING TASKS WEB API ###
+
+### Insert a user
+
+POST http://localhost:8000/users HTTP/2
+Content-Type: application/json
+
+{
+    "username": "asilva"
+}
+
+### Insert another user
+
+POST http://localhost:8000/users HTTP/2
+Content-Type: application/json
+
+{
+    "username": "pnunes"
+}
+
+### Insert another user
+
+POST http://localhost:8000/users HTTP/2
+Content-Type: application/json
+
+{
+    "username": "dduarte"
+}
+
+### Insert a task
+
+POST http://localhost:8000/tasks HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Study HTTP",
+    "description": "Read the documentation."
+}
+
+### Insert a task
+
+POST http://localhost:8000/tasks HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Do class exercise",
+    "description": "Implement the task application."
+}
+
+### Get all tasks
+
+GET http://localhost:8000/tasks HTTP/2
+Authorization: Bearer {{token}}
+
+### Get task 1
+
+GET http://localhost:8000/tasks/snoQP5MBYf62TULrZlMY HTTP/2
+Authorization: Bearer {{token}}
+
+### Update task 1
+
+PUT http://localhost:8000/tasks/snoQP5MBYf62TULrZlMY HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Do class exercise",
+    "description": "Reimplement the task application!!!"
+}
+
+### Delete task 1
+
+DELETE http://localhost:8000/tasks/s3oRP5MBYf62TULrPVPV HTTP/2
+Authorization: Bearer {{token}}

@@ -1,0 +1,102 @@
+### User 2 (testing app)
+@token = f1d1cdbc-97f0-41c4-b206-051250684b19
+
+### ERRORS
+
+### Get tasks without token
+# Expected error: internal code 7, status code 401
+GET http://localhost:8000/tasks HTTP/2
+
+### Get tasks with invalid token
+# Expected error: internal code 5, status code 401
+GET http://localhost:8000/tasks HTTP/2
+Authorization: Bearer abcdef
+
+### Get task with invalid token
+# Expected error: internal code 5, status code 401
+GET http://localhost:8000/tasks/1 HTTP/2
+Authorization: Bearer abcdef
+
+### Get task with invalid user
+# Expected error: internal code 6, status code 401
+GET http://localhost:8000/tasks/2 HTTP/2
+Authorization: Bearer {{token}}
+
+### Get task with inexistent taskId
+# Expected error: internal code 4, status code 404
+GET http://localhost:8000/tasks/20 HTTP/2
+Authorization: Bearer {{token}}
+
+### Get task with invalid parameter (DELETE and PUT should work too).
+# Expected error: internal code 2, status code 400
+GET http://localhost:8000/tasks/a HTTP/2
+Authorization: Bearer {{token}}
+
+### Insert a task with invalid body
+# Expected error: internal code 3, status code 400
+POST http://localhost:8000/tasks HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Study HTTP",
+    "description": "Read the documentation."
+}
+
+### Update a task with invalid body
+# Expected error: internal code 3, status code 400
+PUT http://localhost:8000/tasks/1 HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Study HTTP",
+    "description": "Read the documentation."
+}
+
+### Update a task with invalid parameter
+# Expected error: internal code 2, status code 400
+PUT http://localhost:8000/tasks/a HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Study HTTP",
+    "description": "Read the documentation."
+}
+
+### Update a task with missing taskId
+# Expected error: internal code 1, status code 400
+PUT http://localhost:8000/tasks HTTP/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Study HTTP",
+    "description": "Read the documentation."
+}
+
+### Delete a task with missing taskId
+# Expected error: internal code 1, status code 400
+DELETE http://localhost:8000/tasks HTTP/2
+Authorization: Bearer {{token}}
+
+### Delete a task with invalid taskId
+# Expected error: internal code 2, status code 400
+DELETE http://localhost:8000/tasks/a HTTP/2
+Authorization: Bearer {{token}}
+
+### Delete a task with taskId from other user
+# Expected error: internal code 6, status code 401
+DELETE http://localhost:8000/tasks/2 HTTP/2
+Authorization: Bearer {{token}}
+
+### Delete task with inexistent taskId
+# Expected error: internal code 4, status code 404
+GET http://localhost:8000/tasks/30 HTTP/2
+Authorization: Bearer {{token}}
+
+### Final get all tasks to verify if change something
+# Expected: nothing changed
+GET http://localhost:8000/tasks HTTP/2
+Authorization: Bearer {{token}}
