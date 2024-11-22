@@ -1,5 +1,7 @@
-### User 2 (testing app)
-@token = f1d1cdbc-97f0-41c4-b206-051250684b19
+### User1 (token1) (testing app)
+@token = b61cc2a8-0294-4422-a8d8-a02c2f99f183
+@task-user1 = sHqgO5MBYf62TULrTlNs
+@task-user2 = Jf8zVZMB6oQjLWcDaECS
 
 ### ERRORS
 
@@ -14,21 +16,22 @@ Authorization: Bearer abcdef
 
 ### Get task with invalid token
 # Expected error: internal code 5, status code 401
-GET http://localhost:8000/tasks/1 HTTP/2
+GET http://localhost:8000/tasks/{{task-user1}} HTTP/2
 Authorization: Bearer abcdef
 
 ### Get task with invalid user
 # Expected error: internal code 6, status code 401
-GET http://localhost:8000/tasks/2 HTTP/2
+GET http://localhost:8000/tasks/{{{{task-user2}}}} HTTP/2
 Authorization: Bearer {{token}}
 
 ### Get task with inexistent taskId
 # Expected error: internal code 4, status code 404
-GET http://localhost:8000/tasks/20 HTTP/2
+GET http://localhost:8000/tasks/abc HTTP/2
 Authorization: Bearer {{token}}
 
 ### Get task with invalid parameter (DELETE and PUT should work too).
-# Expected error: internal code 2, status code 400
+# Expected error: internal code 2, status code 400 (not anymore)
+# Expected error: internal code 4, status code 404
 GET http://localhost:8000/tasks/a HTTP/2
 Authorization: Bearer {{token}}
 
@@ -45,7 +48,7 @@ Authorization: Bearer {{token}}
 
 ### Update a task with invalid body
 # Expected error: internal code 3, status code 400
-PUT http://localhost:8000/tasks/1 HTTP/2
+PUT http://localhost:8000/tasks/{{task-user1}} HTTP/2
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -55,7 +58,8 @@ Authorization: Bearer {{token}}
 }
 
 ### Update a task with invalid parameter
-# Expected error: internal code 2, status code 400
+# Expected error: internal code 4, status code 404
+# Expected error: internal code 2, status code 400 (not anymore)
 PUT http://localhost:8000/tasks/a HTTP/2
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -82,18 +86,19 @@ DELETE http://localhost:8000/tasks HTTP/2
 Authorization: Bearer {{token}}
 
 ### Delete a task with invalid taskId
-# Expected error: internal code 2, status code 400
+# Expected error: internal code 4, status code 404
+# Expected error: internal code 2, status code 400 (not anymore)
 DELETE http://localhost:8000/tasks/a HTTP/2
 Authorization: Bearer {{token}}
 
 ### Delete a task with taskId from other user
 # Expected error: internal code 6, status code 401
-DELETE http://localhost:8000/tasks/2 HTTP/2
+DELETE http://localhost:8000/tasks/{{task-user2}} HTTP/2
 Authorization: Bearer {{token}}
 
 ### Delete task with inexistent taskId
 # Expected error: internal code 4, status code 404
-GET http://localhost:8000/tasks/30 HTTP/2
+GET http://localhost:8000/tasks/abc HTTP/2
 Authorization: Bearer {{token}}
 
 ### Final get all tasks to verify if change something

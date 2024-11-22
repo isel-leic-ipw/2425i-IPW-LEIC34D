@@ -13,6 +13,7 @@ function getUserId(matchObj){
   return fetchElastic("POST", "/users/_search", match)
   .then(body => {
       const usersArray = body.hits.hits;
+      console.log(usersArray);
       if(usersArray.length > 0)
         return(usersArray[0]._id);
     }
@@ -24,7 +25,11 @@ function getUserIdByName(username){
 }
 
 export function getUserIdByToken(token){
-  return getUserId({token: token});
+  return getUserId({token: token})
+    .then(userId => {
+      if (userId) return userId;
+      return Promise.reject(errors.USER_NOT_FOUND());
+    });
 }
 
 export function addUser(username){
