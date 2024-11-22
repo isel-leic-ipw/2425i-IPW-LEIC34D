@@ -1,0 +1,122 @@
+@hostname=localhost
+@port=9200
+
+### Get basic information:
+GET http://{{hostname}}:{{port}}
+
+### Remove Books index:
+DELETE /books
+Host: {{hostname}}:{{port}}
+
+### Remove products index:
+DELETE /products
+Host: {{hostname}}:{{port}}
+
+### Create books (as example) index:
+PUT /books
+Host: {{hostname}}:{{port}}
+
+### Create products (as example) index:
+PUT /products
+Host: {{hostname}}:{{port}}
+
+### List indexes:
+GET /*
+Host: {{hostname}}:{{port}}
+
+### Create a document in /books:
+POST /books/_doc
+Host: {{hostname}}:{{port}}
+Content-Type: application/json
+
+{
+    "name": "The Handmaids Tale",
+    "author": "Margaret Atwood", 
+    "release_date": "1985-06-01", 
+    "page_count": 311
+}
+
+### Create another document in /books:
+POST /books/_doc
+Host: {{hostname}}:{{port}}
+Content-Type: application/json
+
+{
+    "name": "1984", 
+    "author": "George Orwell", 
+    "release_date": "1985-06-01", 
+    "page_count": 328
+}
+
+### Create another document in /books:
+POST /books/_doc
+Host: {{hostname}}:{{port}}
+Content-Type: application/json
+
+{
+    "name": "Alias Grace", 
+    "author": "Margaret Atwood", 
+    "release_date": "1996-09-01", 
+    "page_count": 470
+}
+
+### Create another document in /books:
+POST /books/_doc
+Host: {{hostname}}:{{port}}
+Content-Type: application/json
+
+{
+  "name": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "release_date": "1925-04-10",
+  "page_count": 180
+}
+
+### List documents from /books:
+GET /books/_search
+Host: {{hostname}}:{{port}}
+
+### Filter documents from /books by author='Margaret Atwood':
+POST /books/_search
+Host: {{hostname}}:{{port}}
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "author": "Margaret Atwood"
+    }
+  }
+}
+
+### Get document by id from /books:
+# Must specify the id from elasticsearch
+GET /books/_doc/u4HVT5MBTSAYnYUsTi0t
+Host: {{hostname}}:{{port}}
+
+### Update a document (The Great Gatsby"):
+# Must specify the id from elasticsearch
+PUT /books/_doc/u4HVT5MBTSAYnYUsTi0t
+Host: {{hostname}}:{{port}}
+Content-Type: application/json
+
+{
+  "name": "The Great Gatsby",
+  "author": "Francis Scott Fitzgerald",
+  "release_date": "1925-04-10",
+  "page_count": 180
+}
+
+### Get document by id from /books:
+# Must specify the id from elasticsearch
+GET /books/_doc/DdvjRJMBSOEBAVqSnUNw
+Host: {{hostname}}:{{port}}
+
+### Delete a document from /books:
+# Must specify the id from elasticsearch
+DELETE /books/_doc/uYHVT5MBTSAYnYUsHS3o
+Host: {{hostname}}:{{port}}
+
+### List documents from /books:
+GET /books/_search
+Host: {{hostname}}:{{port}}
