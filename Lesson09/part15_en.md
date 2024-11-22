@@ -22,7 +22,7 @@
     - the **response** object (`res`), and 
     - the **next middleware function** in the application's request-response cycle, typically referred to as `next`.
 
-- If a middleware function does not terminate the request-response cycle (`e.g.`, with `send` call), it must invoke `next()`.
+- If a middleware function does not terminate the request-response cycle (*e.g.*, with `send` call), it must invoke `next()`.
     - To pass control to the next middleware function;
     -  otherwise, the request will remain unprocessed.
 
