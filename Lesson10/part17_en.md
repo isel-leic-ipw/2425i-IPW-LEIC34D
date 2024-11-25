@@ -366,3 +366,7 @@
         function addUser(username) { /*...*/ }
     }    
     ```
+
+## Code
+
+- The code is available at: [example-tasks-v1.3.0/](example-tasks-v1.3.0/).
