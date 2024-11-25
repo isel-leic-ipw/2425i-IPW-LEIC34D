@@ -1,0 +1,36 @@
+@hostnameElastic=localhost
+@port=9200
+
+### List documents from /users:
+GET /users/_search
+Host: {{hostnameElastic}}:{{port}}
+
+
+### TESTING TASKS WEB API - users ###
+
+### Insert a user
+
+POST http://localhost:8000/users HTTP/2
+Content-Type: application/json
+
+{
+    "username": "asilva"
+}
+
+### Insert another user
+
+POST http://localhost:8000/users HTTP/2
+Content-Type: application/json
+
+{
+    "username": "pnunes"
+}
+
+### Insert another user
+
+POST http://localhost:8000/users HTTP/2
+Content-Type: application/json
+
+{
+    "username": "dduarte"
+}
