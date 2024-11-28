@@ -182,11 +182,14 @@
         const tasksServices = taskServicesInit(tasksData, usersServices);
         const tasksAPI = tasksApiInit(tasksServices);
         const usersAPI = usersApiInit(usersServices);
+    }
+    catch (err){ // An runtime error
+        console.error(err);
+    }
+
+    if(taskAPI && userAPI){
 
         // Express app...
-    }
-    catch (err){
-        console.error(err);
     }
     ```
 
@@ -370,3 +373,4 @@
 ## Code
 
 - The code is available at: [example-tasks-v1.3.0/](example-tasks-v1.3.0/).
+    - With a unit test with mocha for `getAllTasks` from `tasks-services.mjs` module.
