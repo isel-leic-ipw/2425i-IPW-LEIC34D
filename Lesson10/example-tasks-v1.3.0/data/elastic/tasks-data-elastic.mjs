@@ -46,7 +46,13 @@ export default function init(){
             }
         };
         return fetchElastic('POST', '/tasks/_search', filter)
-            .then(resp => resp.hits.hits)
+            .then(resp => {
+                if (resp.error){
+                    console.error(resp.error.reason);
+                    return []; // There is no index tasks: returns an empty list.
+                }
+                return resp.hits.hits;
+            })
             .then(tasks => tasks.map(aTaskFromElastic));
     }
 

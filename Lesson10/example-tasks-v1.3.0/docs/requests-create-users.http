@@ -34,3 +34,8 @@ Content-Type: application/json
 {
     "username": "dduarte"
 }
+
+### Delete index users in Elasticsearch
+
+DELETE /users
+Host: {{hostnameElastic}}:{{port}}

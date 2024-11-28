@@ -5,6 +5,8 @@ import cors from 'cors';
 
 // Port number for the tests
 const PORT = 8000;
+let tasksAPI = undefined;
+let usersAPI = undefined;
 
 // Import all modules for Dependency Injection:
 import tasksApiInit from './web/api/tasks-web-api.mjs';
@@ -17,16 +19,21 @@ import tasksDataInit from './data/elastic/tasks-data-elastic.mjs';
 import usersDataInit from './data/elastic/users-data-elastic.mjs';
 
 // Dependency Injection:
-
 try {
   const tasksData = tasksDataInit();
   const usersData = usersDataInit();
   const usersServices = userServicesInit(usersData);
   //const usersServices = userServicesInit();
   const tasksServices = taskServicesInit(tasksData, usersServices);
-  const tasksAPI = tasksApiInit(tasksServices);
-  const usersAPI = usersApiInit(usersServices);
-  
+  tasksAPI = tasksApiInit(tasksServices);
+  usersAPI = usersApiInit(usersServices);
+}
+catch (err) {
+  console.error(err);
+}
+
+// Init application Express only if tasksAPI and usersAPI were set.
+if (tasksAPI && usersAPI){
   // Express function returns an app
   const app = express();
   
@@ -70,8 +77,4 @@ try {
   app.listen(PORT, () =>
     console.log(`Example app listening on port ${PORT}!`),
   );
-} catch (err) {
-  console.error(err);
 }
-
-// Testing: use the Rest Client in VScode or Postman to make the following request

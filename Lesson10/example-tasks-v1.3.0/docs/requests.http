@@ -1,14 +1,14 @@
 ### Variables
-@token1 = b61cc2a8-0294-4422-a8d8-a02c2f99f183
-@token2 = d956cf64-1c2f-46f9-935c-8d8c93399886
+@token1 = 86130b25-a37e-4f19-9842-549b2fd5bb2c
+@token2 = 1a9b3458-fea6-4250-b92b-a3d3b593f446
 @hostnameElastic=localhost
 @port=9200
 
 ### TASKS -- ELASTIC ###
 
 ### Delete tasks index:
-#DELETE /tasks
-#Host: {{hostnameElastic}}:{{port}}
+DELETE /tasks
+Host: {{hostnameElastic}}:{{port}}
 
 ### List documents from /tasks:
 GET /tasks/_search

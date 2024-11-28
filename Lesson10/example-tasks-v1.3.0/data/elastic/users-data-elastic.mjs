@@ -19,6 +19,10 @@ export default function init(){
     };
     return fetchElastic("POST", "/users/_search", match)
     .then(body => {
+        if (body.error){
+          console.error(body.error.reason);
+          return undefined;
+        }
         const usersArray = body.hits.hits;
         console.log(usersArray);
         if(usersArray.length > 0)
