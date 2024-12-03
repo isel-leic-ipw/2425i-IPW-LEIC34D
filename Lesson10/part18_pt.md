@@ -1,5 +1,5 @@
 
-# Visão Geral do HTML
+# Visão Geral do HTML e CSS
 
 - HTML: *HyperText Markup Language*.
 - Linguagem de **marcação** para documentos **hipertexto**.
