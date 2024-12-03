@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script type="text/javascript">
+            function adicionaTabela() {
+				let el = document.getElementById("meuDiv");
+				el.innerHTML += "<table><tr><th>Col 1</th><th>Col 2</th></tr>";
+				el.innerHTML += "<tr><td>Dado 1</td><td>Dado 2</td></tr></table>";
+			}
+        </script>
+	</head>
+	<body>
+		<h1>Tabela Dinâmica</h1>
+		<div id="meuDiv"></div>
+        <input type="button" value="Adiciona Tabela" onclick="adicionaTabela();">
+	</body>
+</html>

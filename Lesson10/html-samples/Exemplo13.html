@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script type="text/javascript">
+            let elementosAdicionados = 0;
+            function adicionaLinha() {
+				let el = document.getElementById("minhaTabela");
+                let tr = document.createElement("tr");
+                let td1 = document.createElement("td");
+                let td2 = document.createElement("td");
+                let text1 = document.createTextNode("Texto célula " + String(++elementosAdicionados));
+                let text2 = document.createTextNode("Texto célula " + String(++elementosAdicionados));
+                td1.appendChild(text1);
+                td2.appendChild(text2);
+                tr.appendChild(td2);
+                tr.insertBefore(td1, td2); // td1 inserido antes do td2!
+                el.appendChild(tr);
+			}
+        </script>
+	</head>
+	<body>
+		<h1>Tabela Dinâmica (II)</h1>
+		<table id="minhaTabela">
+            <tr><th>Col 1</th><th>Col 2</th></tr>
+        </table>
+        <input type="button" value="Nova linha ao final" onclick="adicionaLinha();">
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script type="text/javascript">
+            function retornaNoEFilhos(no, nivel) {
+                let s = "", i;
+                if (nivel > 0) {
+                    for (i = 0; i < nivel - 1; i++) s += "      ";
+                    s += "+---- "
+                }
+                s += no.nodeName + "\n";
+                for (i = 0; i < no.childNodes.length; i++) 
+                    s += retornaNoEFilhos(no.childNodes[i], nivel + 1);
+                return(s);
+            }
+        </script>
+	</head>
+	<body>
+		<h1>Título</h1>
+        <h2>Seção</h2>
+        Uma <b>tabela</b>:<br>
+		<table>
+            <tr><th>Col 1</th><th>Col 2</th></tr>
+            <tr><td><s>val 1</s></td><td><u>val 2</u></td></tr>
+            <tr><td><a href="outraPagina.html">val 3</a></td><td>val 4</td></tr>
+        </table>
+        <input type="button" value="Gerar DOM" onclick="alert(retornaNoEFilhos(document.documentElement, 0));">
+	</body>
+</html>

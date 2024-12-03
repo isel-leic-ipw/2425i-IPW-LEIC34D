@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script type="text/javascript">
+			let indiceCor = 0;
+            let cores = ["", "blue", "red", "green", "orange"];
+            function alteraCor() {
+				indiceCor = (indiceCor + 1) % cores.length;
+				let el = document.getElementById("meuElemento");
+				el.style.color = cores[indiceCor];
+			}
+        </script>
+	</head>
+	<body>
+		<h1>Mudança de cor</h1>
+		<p id="meuElemento">Um texto qualquer</p>
+        <input type="button" value="Alterar cor" onclick="alteraCor();">
+	</body>
+</html>

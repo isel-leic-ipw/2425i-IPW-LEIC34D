@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script type="text/javascript">
+            function substitui() {
+				let lista = document.getElementById("lista");
+				let item = document.getElementById("substituido");
+                let novo = document.createElement("li");
+                novo.appendChild(document.createTextNode("Novo item"));
+                lista.replaceChild(novo, item);
+			}
+            function remove() {
+				let lista = document.getElementById("lista");
+				let item = document.getElementById("removido");
+                lista.removeChild(item);
+			}
+        </script>
+	</head>
+	<body>
+		<h1>Remoção e Substituição</h1>
+		<ul id="lista">
+            <li id="substituido">Item 1</li>
+            <li>Item 2</li>
+            <li id="removido">Item 3</li>
+        </ul>
+        <input type="button" value="Remove" onclick="remove();"></input>
+        <input type="button" value="Substitui" onclick="substitui();"></input>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script type="text/javascript">
+            let timer;
+            function iniciar() {
+				let botao = document.getElementsByTagName("input")[0];
+                botao.value = "Parar";
+                botao.onclick = parar;  // Altera callback do botão.
+                timer = setTimeout(timerCallback, 1000);
+			}
+            function parar() {
+				let botao = document.getElementsByTagName("input")[0];
+                botao.value = "Iniciar";
+                botao.onclick = iniciar;  // Altera callback do botão.
+                clearTimeout(timer);
+			}
+            function timerCallback() {
+                let el = document.getElementById("titulo");
+                if (el.style.color == "red") el.style.color = "";
+                else el.style.color = "red";
+                timer = setTimeout(timerCallback, 1000);
+            }
+        </script>
+	</head>
+	<body>
+		<h1 id="titulo">Temporizador</h1>
+        <input type="button" value="Iniciar" onclick="iniciar();"></input>
+	</body>
+</html>
