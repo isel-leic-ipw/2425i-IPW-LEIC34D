@@ -1,5 +1,5 @@
 
-# Visão Geral do HTML e CSS
+# Visão Geral do HTML (TODO: Translate)
 
 - HTML: *HyperText Markup Language*.
 - Linguagem de **marcação** para documentos **hipertexto**.
@@ -254,22 +254,7 @@
 
 - Exemplo disponível em: [html-samples/Exemplo5.html](html-samples/Exemplo5.html)
 
-- Ver mais exemplos da [documentação do W3Schools](https://www.w3schools.com/html/html_form_input_types.asp).
-
 ### Elementos dos Formulários
-
-- O elemento HTML `<form>` pode conter um ou mais dos seguintes elementos de formulário:
-    - `<input>`: como descrito anteriormente.
-    - `<label>`: como descrito anteriormente.
-    - `<select>`: define uma lista suspensa.
-    - `<option>`: define uma opção que pode ser selecionada (dentro de um `<select>`).
-    - `<optgroup>`: define um grupo de opções relacionadas numa lista suspensa.
-    - `<textarea>`: define um campo de entrada multilinha (uma área de texto).
-    - `<button>`: define um botão (como descrito anteriormente).
-    - `<fieldset>`: é usado para agrupar dados relacionados em um formulário.
-    - `<legend>`: define uma legenda para o `<fieldset>` elemento.
-    - `<datalist>`: especifica uma lista de opções predefinidas para um elemento `<input>`.
-    - `<output>`:  representa o resultado de um cálculo (como aquele realizado por um script).
 
 - Ver exemplos em: https://www.w3schools.com/html/html_form_elements.asp
 
@@ -309,6 +294,7 @@
 #### Métodos HTTP
 
 - Suporta apenas dois métodos: POST e GET.
+    - POST é o valor por omissão.
 - No POST, mensagem vai no corpo/body com o `Content_type` *URL-encoded*:
     - `application/x-www-form-urlencoded`
 
@@ -318,7 +304,7 @@
     - Conteúdo do formulário vai na URL.
 - [Documentação.](https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data)
 
-- Exemplo:
+- Examplo:
 
 ```html
 <form action="server-endpoint-that-does-not-exist" method="GET">
@@ -555,19 +541,18 @@
 
 ## Bootstrap
 
-- Botstrap é uma *framework* front-end gratuita para um desenvolvimento de web *design* mais rápido e fácil.
-- O Bootstrap inclui modelos de *design* baseados em HTML e CSS para tipografia, formulários, botões, tabelas, navegação, modais, imagens, carrosséis e muitos outros.
-- É uma *framework* para a criação de sites responsivos e direcionados para dispositivos móveis.
-- O Bootstrap 5 é a versão mais recente do Bootstrap.
+- Bootstrap is a free front-end framework for faster and easier web design development.
+- Bootstrap includes HTML and CSS based design templates for typography, forms, buttons, tables, navigation, modals, image carousels and many other.
+- It is a framework for creating responsive, mobile-first websites.
+- Bootstrap 5 is the newest version of Bootstrap.
 
-### Uso
+### Usage
 
-- Incluir CSS e JS do Bootstrap no elemento de cabeçalho da página HTML.
-    - Pode fazer o download ou usar o link de um CDN.
-- É necessário especificar primeiro a página **viewport** para utilizar as funcionalidades **responsivas**.
-- O bootstrap utiliza as propriedades dos elementos **class** e **id** para definir os recursos.
-    - Ver a [documentação](https://getbootstrap.com/docs/5.3/getting-started/introduction/) or [W3C tutorials](https://www.w3schools.com/bootstrap5/index.php).
-- Exemplo simples:
+- Include CSS and JS in the header element of the HTML page.
+- Need to specify the page **viewport** first to use the **responsive** resources.
+- Bootstrap uses **classes** and **id** element properties to define the features.
+    - See the [documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/) or [W3C tutorials](https://www.w3schools.com/bootstrap5/index.php).
+- Example:
     ```html
     <!DOCTYPE html>
     <head>
@@ -588,4 +573,3 @@
     </body>
     </html>
     ```
-- Outro exemplo disponível em [html-samples/semantic-Bootstrap.html](html-samples/semantic-Bootstrap.html).
