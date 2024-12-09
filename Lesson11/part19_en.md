@@ -570,7 +570,7 @@
 
 - New module `tasks-web-site.mjs` in `web/site/`.
     - With dependency injection.
-    - Server init this module as `tasksSite`, with dependency of `tasksServices` module.
+    - Server inits this module as `tasksSite`, with dependency of `tasksServices` module.
 
 - New Express routes in `/site`.
     ```javascript
@@ -581,8 +581,28 @@
     app.post("/site/tasks/:taskId/update", tasksSite.updateTask);
     ```
 - Notes:
-    - For DELETE and PUT methods, use POST because of forms.
+    - For DELETE and PUT methods, use POST because of the forms.
         - Forms in HTML only implements GET and POST methods for submission.
+
+#### Views and Partials
+
+#### Layout
+
+- A file `layout.hbs`, in `views/` directory, works as a layout for all pages.
+    - The HTML-escape `{{{body}}}` is replaced by the view indicated in Express.
+- Example with Bootstrap:
+    ```hbs
+    <!DOCTYPE html> 
+    <html> 
+        <head> 
+            <title>Tasks Web Site</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        </head> 
+        <body> 
+            {{{body}}}
+        </body> 
+    </html>
+    ```
 
 #### Tasks Web Site Code
 
