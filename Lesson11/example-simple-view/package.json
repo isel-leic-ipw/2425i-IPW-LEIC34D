@@ -1,0 +1,17 @@
+{
+  "name": "example-simple-view",
+  "version": "1.0.0",
+  "description": "A simple example with Express and HBS.",
+  "main": "server-with-hbs.mjs",
+  "scripts": {
+    "start": "node",
+    "start-dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "hbs": "^4.2.0"
+  }
+}

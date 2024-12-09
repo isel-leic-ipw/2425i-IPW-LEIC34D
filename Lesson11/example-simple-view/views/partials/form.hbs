@@ -1,0 +1,16 @@
+<section>
+    <form action="/cars" method="POST">
+        <h3> Form Cars: </h3>
+        <label for="fname">Firstname:</label>
+        <input type="text" id="fname" name="fname" required>
+        <br><br>
+        <label for="cars">Choose a car:</label>
+        <select name="cars" id="cars" required>
+            {{#each carList}}
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</section>

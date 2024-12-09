@@ -1,0 +1,33 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Handlebars Demo</title>
+  <link href={{cssFile}} rel="stylesheet" type="text/css">
+  <!-- <link href="styles.css" rel="stylesheet" type="text/css"> -->
+</head> 
+<body> 
+  <section class="container-fluid">
+    {{> header}}
+
+    {{> content}}
+
+    <!-- For loop demo with key -->
+    <table>
+    {{#each user}}  
+      <tr> 
+        <!-- Uses firstUpperCase register Helper -->
+        <td> {{firstUpperCase @key}}: </td> 
+        <td> {{this}} </td>
+      </tr>
+    {{/each}}
+    <table>
+      
+    <br>
+    {{{articleHtmlWithoutEscape}}}
+
+    <a href="/form-cars">Go to form cars</a>
+
+    {{> footer}}
+  </section>
+</body> 
+</html>

@@ -1,0 +1,35 @@
+table {
+    color: rgb(24, 74, 167);
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+table tr td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+img {
+    padding: 10px;
+}
+
+h1 {
+    color:rgb(24, 74, 167)
+}
+
+h3 {
+    color:rgb(127, 24, 167)
+}
+
+footer {
+    color: gray;
+    padding: 15px;
+}
+
+form {
+    width: 280px;
+    margin: 0 auto;
+    background-color: #fcfcfc;
+    padding: 20px 50px 40px;
+    box-shadow: 1px 4px 10px 1px #aaa;
+}
