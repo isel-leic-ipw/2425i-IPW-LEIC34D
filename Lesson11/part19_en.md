@@ -583,10 +583,141 @@
 - Notes:
     - For DELETE and PUT methods, use POST because of the forms.
         - Forms in HTML only implements GET and POST methods for submission.
+    - Later, we will see how use PUT and DELETE methods with client-site javascript, using `fetch`.
 
-#### Views and Partials
+#### Views
 
-#### Layout
+- View for a **task** (*e.g.*, `http://localhost:8000/site/tasks/6`):
+    ```hbs
+    <!DOCTYPE html> 
+    <html> 
+    <head> 
+        <title>Tasks Web Site</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    </head> 
+    <body> 
+        <section class="container p-2">
+            {{> header}}
+
+            {{> task}}
+
+            {{> updateTaskForm}}
+
+            {{> footer}}
+        </section>
+    </body> 
+    </html>
+    ```
+
+- View for all **tasks** and a new task in the same web page:
+    ```hbs
+    <!DOCTYPE html> 
+    <html> 
+    <head> 
+        <title>Tasks Web Site</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    </head> 
+    <body> 
+        <section class="container p-2">
+            {{> header}}
+
+            {{> tasks}}
+
+            {{> newTaskForm}}
+
+            {{> footer}}
+        </section>
+    </body> 
+    </html>
+    ```
+
+#### Partials
+
+- Header partial:
+    ```hbs
+    <header class="container p-3 bg-primary text-light text-center">
+        <h1> Tasks Web Site </h1>
+    </header>
+    ```
+
+- Footer partial:
+    ```hbs
+    <footer class="container p-3 bg-primary text-light text-center">
+        Contact: myemail@email.pt
+    </footer>    
+    ```
+
+- Task partial:
+    ```hbs
+    <section class="container p-2">
+        <h2> {{title}} </h2>
+        <p> {{description}} </p>
+    </section>    
+    ```
+
+- Tasks (all) partial:
+    ```hbs
+    <section class="container p-2">
+    <h2> List of Tasks: </h2>
+
+    <!-- Show a task in each row of a table -->
+    <table class="table">
+        <tr>
+            <th> Title </th> 
+            <th> Description </th>
+            <th> </th>
+            <th> </th>
+        </tr>
+        {{#each tasks}}
+        <tr>
+            <td> {{this.title}} </td>
+            <td> {{this.description}} </td> 
+            <td>
+                <a href="/site/tasks/{{this.id}}" class="btn btn-primary"> Edit </a>
+            </td>
+            <td>
+                <form action="/site/tasks/{{this.id}}/delete" method="POST">
+                    <input type="submit" value="del" class="btn btn-primary">
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+    </section>    
+    ```
+
+- Partial with a form for creating a new task:
+    ```hbs
+    <section class="container p-2 bg-light shadow">
+        <h2> New task: </h2>
+        <form action="/site/tasks" method="POST">
+            {{> taskContentForm}}
+        </form>
+    </section>
+    ```
+
+- Partial with a form for updating a task:
+    ```hbs
+    <section class="container p-2 bg-light shadow">
+        <h2> Update task: </h2>
+        <form action="/site/tasks/{{id}}/update" method="POST">
+            {{> taskContentForm}}
+        </form>
+    </section>
+    ```
+
+- Tasks Content Form partial:
+    ```hbs
+    <label for="taskTitle" class="form-label"> Title: </label>
+    <input type="text" id="taskTitle" class="form-control" name="title" required> 
+
+    <label for="taskDescription" class="form-label"> Description: </label>
+    <textarea id="taskDescription" class="form-control" name="description"> </textarea>
+
+    <input type="submit" class="btn btn-primary" value="Submit">        
+    ```
+
+#### Layout and Views
 
 - A file `layout.hbs`, in `views/` directory, works as a layout for all pages.
     - The HTML-escape `{{{body}}}` is replaced by the view indicated in Express.
@@ -596,14 +727,88 @@
     <html> 
         <head> 
             <title>Tasks Web Site</title>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
         </head> 
         <body> 
+            <!-- Any view without body -->
             {{{body}}}
         </body> 
     </html>
     ```
+- So, the view for a task becomes:
+    ```hbs
+        <section class="container p-2">
+            {{> header}}
+
+            {{> task}}
+
+            {{> updateTaskForm}}
+
+            {{> footer}}
+        </section>
+    ```
+- And the view for all tasks and a new task becomes:
+    ```hbs
+        <section class="container p-2">
+            {{> header}}
+
+            {{> tasks}}
+
+            {{> newTaskForm}}
+
+            {{> footer}}
+        </section>
+    ```
+
+#### Tasks Web Site Module
+
+- Module `tasks-web-site.mjs`, similar to the `tasks-web-api.mjs`.
+    - But now, using `render` or `redirect` stead of `send` or `json` functions.
+- Get all tasks function:
+    ```javascript
+    function local_getAllTasks(req, res){
+        const tasksPromise = tasksServices.getAllTasks(req.userToken)
+        return tasksPromise.then(tasks => res.render("tasks-view", {tasks}));
+    }
+    ```
+
+- Get task function:
+    ```javascript
+    function local_getTask(req, res){
+        const taskId = req.params.taskId;
+        const taskPromise = tasksServices.getTask(taskId, req.userToken);
+        return taskPromise.then(task => res.render("task-view", task));
+    }    
+    ```
+- Add task function:
+    ```javascript
+    function local_addTask(req, res){
+        const taskPromise = tasksServices.addTask(req.body, req.userToken);
+        return taskPromise.then(task => {
+        res.status(201);
+        return res.redirect("/site/tasks");
+        });
+    }    
+    ```
+- Delete task function:
+    ```javascript
+    function local_deleteTask(req, res){
+        const taskId = req.params.taskId;
+        const deleteTaskPromise = tasksServices.deleteTask(taskId, req.userToken);
+        return res.redirect("/site/tasks");
+    }
+    ```
+- Update task function:
+    ```javascript
+    function local_updateTask(req, res){
+        const taskId = req.params.taskId;
+        const newTask = req.body;
+        const userToken = req.userToken;
+        const updatedTaskPromise = tasksServices.updateTask(taskId, newTask, userToken);
+        return res.redirect("/site/tasks");
+    }
+    ```
 
 #### Tasks Web Site Code
 
-- The Tasks Web Site project is available at: []() 
+- The Tasks Web Site project is available at: [example-tasks-v2.0.0/](example-tasks-v2.0.0/) 
