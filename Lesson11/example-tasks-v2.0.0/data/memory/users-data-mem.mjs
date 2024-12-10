@@ -49,6 +49,7 @@ export default function init(){
 
   function getUserIdByToken(token){
     return new Promise((resolve, reject) => {
+      console.log(token);
       let user = USERS.find(user => user.token == token);
       if (user)
         resolve(user.id);

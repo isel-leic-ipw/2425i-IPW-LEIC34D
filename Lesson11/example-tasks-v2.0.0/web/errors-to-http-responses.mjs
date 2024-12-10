@@ -1,4 +1,4 @@
-import { INTERNAL_ERROR_CODES } from '../../commons/errors.mjs';
+import { INTERNAL_ERROR_CODES } from '../commons/errors.mjs';
 
 function HttpResponse(status, e) {
     this.status = status;

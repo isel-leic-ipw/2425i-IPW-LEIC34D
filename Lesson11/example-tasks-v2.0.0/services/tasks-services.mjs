@@ -8,11 +8,11 @@ export default function init(tasksData, usersServices){
 
   // Verify the dependencies:
   if(! tasksData){
-    return Promise.reject(errors.INVALID_ARGUMENT('tasksData'));
+    throw errors.INVALID_ARGUMENT('tasksData');
   }
 
   if(! usersServices){
-    return Promise.reject(errors.INVALID_ARGUMENT('usersServices'));
+    throw errors.INVALID_ARGUMENT('usersServices');
   }
 
   return {
