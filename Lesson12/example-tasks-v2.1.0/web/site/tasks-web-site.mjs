@@ -23,8 +23,9 @@ export default function init(tasksServices){
 
   function processRequest(operation){
     return function (req, res, next){
-      return operation(req, res, next)
-      .catch(next);
+
+      const opPromise = operation(req, res, next);
+      return opPromise.catch(next);
     }
   }
 
@@ -41,14 +42,13 @@ export default function init(tasksServices){
   }
 
   function handlerError (err, req, res, next) {
-    console.log("ERROR:", err);
+    console.log("ERROR (site):", err);
     getResponseError(res, err);
   }
 
   function getResponseError(res, err){
-    //console.log(err);
     const responseError = errorToHttp(err);
-    // TODO: Show the error in a HTML page.
+    console.log(responseError.body);
     res.status(responseError.status);
     return res.render("errors-view", responseError.body);
     //return res.json(responseError.body);
@@ -56,7 +56,7 @@ export default function init(tasksServices){
 
   function local_getAllTasks(req, res){
     const tasksPromise = tasksServices.getAllTasks(req.userToken)
-    return tasksPromise.then(tasks => res.render("tasks-view", {tasks}));
+    return tasksPromise.then(tasks => res.render("tasks-view", {tasks, token: req.userToken}));
   }
 
   function local_getTask(req, res){
@@ -75,8 +75,9 @@ export default function init(tasksServices){
 
   function local_deleteTask(req, res){
     const taskId = req.params.taskId;
+    console.log(taskId, req.userToken);
     const deleteTaskPromise = tasksServices.deleteTask(taskId, req.userToken);
-    return res.redirect("/site/tasks");
+    return deleteTaskPromise.then(deleteTask => res.redirect("/site/tasks"));
   }
 
   function local_updateTask(req, res){
@@ -84,7 +85,7 @@ export default function init(tasksServices){
     const newTask = req.body;
     const userToken = req.userToken;
     const updatedTaskPromise = tasksServices.updateTask(taskId, newTask, userToken);
-    return res.redirect("/site/tasks");
+    return updatedTaskPromise.then(updatedTask => res.redirect("/site/tasks"));
   }
 
   // Auxiliary module function

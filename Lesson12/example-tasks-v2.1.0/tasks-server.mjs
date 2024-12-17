@@ -16,6 +16,8 @@ const PATH_PUBLIC = path.join(CURRENT_DIR, 'web', 'site', 'public');
 const PATH_VIEWS = path.join(CURRENT_DIR, 'web', 'site', 'views');
 const PATH_PARTIALS = path.join(PATH_VIEWS, 'partials');
 
+console.log(PATH_PUBLIC);
+
 // Variables
 let tasksAPI = undefined;
 let usersAPI = undefined;
@@ -108,8 +110,8 @@ if (tasksAPI && usersAPI && tasksSite){
   app.post("/site/tasks/:taskId?/update", tasksSite.updateTask);
   
   // Handling all errors
-  app.use("/site*", tasksAPI.handlerError);
-  app.use("/tasks*", tasksSite.handlerError);
+  app.use("/tasks*", tasksAPI.handlerError);
+  app.use("/site*", tasksSite.handlerError);
   
   // App listening...
   app.listen(PORT, () =>
