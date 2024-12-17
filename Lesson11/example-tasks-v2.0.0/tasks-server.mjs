@@ -101,15 +101,16 @@ if (tasksAPI && usersAPI && tasksSite){
   
   // delete task by id
   app.delete("/tasks/:taskId?", tasksAPI.deleteTask);
-  app.post("/site/tasks/:taskId?/delete", tasksSite.deleteTask);
+  //app.post("/site/tasks/:taskId?/delete", tasksSite.deleteTask);
+  app.delete("/site/tasks/:taskId?", tasksSite.deleteTask);
   
   // update task by id
   app.put("/tasks/:taskId?", tasksAPI.updateTask);
   app.post("/site/tasks/:taskId?/update", tasksSite.updateTask);
   
   // Handling all errors
-  app.use("/site*", tasksAPI.handlerError);
-  app.use("/tasks*", tasksSite.handlerError);
+  app.use("/site*", tasksSite.handlerError);
+  app.use("/tasks*", tasksAPI.handlerError);
   
   // App listening...
   app.listen(PORT, () =>

@@ -8,7 +8,7 @@ function HttpResponse(status, e) {
     };
 }
 
-export function errorToHttp(e) {
+export default function errorToHttp(e) {
     switch(e.code) {
         case INTERNAL_ERROR_CODES.MISSING_PARAMETER: return new HttpResponse(400, e);
         case INTERNAL_ERROR_CODES.INVALID_PARAMETER: return new HttpResponse(400, e);
