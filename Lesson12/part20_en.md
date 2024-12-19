@@ -12,9 +12,12 @@
 
 ### Sessions with Cookies
 
-- A **session** is established by setting an **HTTP cookie** in the browser.
+- A **session** is established by setting **HTTP cookies** in the browser.
+    - For an user, it is a set of information about the user session (*e.g.*, name, id, token, ...).
+    - Typically, a random number or string is the value of a cookie, also with an authentication tag.
+    - The session is associated to this cookie.
 - The browser then transmits the HTTP cookie to the server on every request. 
-- [**Web cookies**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) are small data used for web site server and client browser to maintain some state between transactions.
+- **Definition**: [**Web cookies**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) are small data used for web site server and client browser to maintain some state between transactions.
     - Server application can **set cookies** with web browsers.
     - Web browser sends these cookies back in response to each request.
 
@@ -45,10 +48,26 @@
     - `resave`: forces the session to be saved back to the session store, even if the session was never modified during the request.
     - `saveUninitialized`: forces a session that is "uninitialized" to be saved to the store.
     - Cookie properties, such as `secure` and `httpOnly`, can be configured here.
+- Example of a cookie session:
+    - To see this value, import `cookie-parser` module and use its middleware in Express.
+    ```javascript
+    req.cookies: {
+        'connect.sid': 's:6GwaGa39CWXl2TAjMPbDbQqQV93L-8Zk.pv/Qvdfnm3H73xfSLvGnj0TzJPDGJ87NGOAuXx7yhWs'
+    }
+    ```
+- Example of a session with passport:
+    ```javascript
+    Session: Session {
+        cookie: { path: '/', _expires: null, originalMaxAge: null, httpOnly: true },
+        passport: {
+            user: { name: 'isel', token: 'f1d1cdbc-97f0-41c4-b206-051250684b19' }
+        }
+    }
+    ```
 
 ### Passport with Sessions
 
-- `passport-session()` is  a middleware to add passport to the session and alter the request object related to the user.
+- `passport.session()` is  a middleware to add passport to the session and alter the request object related to the user.
 - To maintain a login session, **passport** serializes and deserializes user information to and from the session.
 - The information that is stored is determined by the application, which supplies a `serializeUser` and a `deserializeUser` function.
     ```javascript
@@ -159,7 +178,7 @@
     ```javascript
     function authenticate(req, res, next){
         if (! req.isAuthenticated())
-            res.redirect('/login');
+            return res.redirect('/login');
         next();
     }
     ```
