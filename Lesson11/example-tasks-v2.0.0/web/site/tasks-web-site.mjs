@@ -76,7 +76,7 @@ export default function init(tasksServices){
   function local_deleteTask(req, res){
     const taskId = req.params.taskId;
     const deleteTaskPromise = tasksServices.deleteTask(taskId, req.userToken);
-    return deleteTaskPromise.then(res.redirect("/site/tasks"));
+    return deleteTaskPromise.then(deleteTask => res.redirect("/site/tasks"));
   }
 
   function local_updateTask(req, res){
@@ -84,7 +84,7 @@ export default function init(tasksServices){
     const newTask = req.body;
     const userToken = req.userToken;
     const updatedTaskPromise = tasksServices.updateTask(taskId, newTask, userToken);
-    return updatedTaskPromise.then(res.redirect("/site/tasks"));
+    return updatedTaskPromise.then(updateTask => res.redirect("/site/tasks"));
   }
 
   // Auxiliary module function
