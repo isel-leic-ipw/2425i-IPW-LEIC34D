@@ -3,6 +3,7 @@
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
+import cookieParser from 'cookie-parser'; // Only used to see the cookie value
 
 const PORT = 8888;
 
@@ -31,6 +32,7 @@ app.use(express.urlencoded({extended:false})); // Read body into req.body
 app.use(sessionHandler);        // Support sessions in req.session
 app.use(passport.session());    // Support login sessions in passport
 //app.use(passport.authenticate('session')); // the same
+app.use(cookieParser()); 		// Only used to see the cookie value
 
 // Users example in memory:
 const USERS = [
@@ -54,7 +56,7 @@ function nextId(){
 	return(currentId++);
 }
 
-// Protected by authentication
+// Resource protected by authentication
 app.get('/', authenticate, home);
 
 app.get('/login', loginHome);
@@ -80,14 +82,16 @@ function authenticate(req, res, next){
 }
 
 function home(req, res){
-	//console.log("Session:", req.session);
+	console.log("Session:", req.session);
+	console.log("req.cookies:", req.cookies);
 	console.log("req.user:", req.user);
 
 	return res.send(LoggedInHome(req));
 }
 
 function loginHome(req, res){
-	console.log("Session:", req.session);
+	console.log("Session in login home:", req.session);
+	console.log("Cookies in login home:", req.cookies);
 
 	// If user is already authenticated, go to home
 	if (req.isAuthenticated())
@@ -97,7 +101,8 @@ function loginHome(req, res){
 }
 
 function signupHome(req, res){
-	console.log("Session:", req.session);
+	console.log("Session in signup home:", req.session);
+	console.log("Cookies in signup home:", req.cookies);
 
 	return res.send(SignupHome);
 }
@@ -133,15 +138,12 @@ function loginAuth(req, res, next){
 }
 
 function logout (req, res) {
-	console.log("Session:", req.session);
-
 	return req.logout(function (){
 		return res.redirect('/');
 	});
 }
 
 function signup(req, res, next) {
-	console.log("Session:", req.session);
 
 	const username = req.body.username;
 	const password = req.body.password;
