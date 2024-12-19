@@ -19,7 +19,7 @@
         <td>
             <!-- The prefix '../' to the token represents the object outside of each structure 
             (need to use '../' as prefix stead of '{{token}}'). -->
-            <button type="button" class="btn btn-primary" id="bt-delete" onclick="handleClickDelete({{this.id}}, '{{../token}}')"> Delete </button>
+            <button type="button" class="btn btn-primary" id="bt-delete" onclick="handleClickDelete({{this.id}}, '{{this.title}}', '{{../token}}')"> Delete </button>
             <!--            
             <form action="/site/tasks/{{this.id}}/delete" method="POST">
                 <input type="submit" value="del" id="bt-delete" class="btn btn-primary">

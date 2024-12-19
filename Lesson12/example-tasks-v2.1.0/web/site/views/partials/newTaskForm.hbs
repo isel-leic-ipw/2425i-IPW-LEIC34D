@@ -1,6 +1,13 @@
 <section class="container p-2 bg-light shadow">
     <h2> New task: </h2>
-    <form action="/site/tasks" method="POST">
+    <form id="formNewTask" action="/site/tasks" method="POST">
         {{> taskContentForm}}
     </form>
+    <div class="container p-1">
+        <button id="btn-add-task"
+            class="btn btn-primary" 
+            type="submit" 
+            form="formNewTask"
+        > Submit </button>
+    </div>
 </section>

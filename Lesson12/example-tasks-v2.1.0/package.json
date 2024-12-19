@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node tasks-server.mjs",
-    "start-dev": "nodemon -e js,hbs, tasks-server.mjs",
+    "start-dev": "nodemon -e mjs,js,hbs, tasks-server.mjs",
     "test": "mocha"
   },
   "author": "Fernanda Passos",
